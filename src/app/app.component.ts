@@ -5,7 +5,6 @@ import { CommonModule } from "@angular/common";
 import {MainPageCardComponent} from "./main-page-card/main-page-card.component";
 import {Post} from "./models/post.model";
 import {PostService} from "./services/post.service";
-import {runInThisContext} from "node:vm";
 
 @Component({
   selector: 'app-root',
