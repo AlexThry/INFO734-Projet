@@ -4,19 +4,27 @@ import { initFlowbite } from 'flowbite';
 import { CommonModule } from "@angular/common";
 import {SidebarComponent} from "./sidebar/sidebar.component";
 import {TopbarComponent} from "./topbar/topbar.component";
+import {MainPageCardComponent} from "./main-page-card/main-page-card.component";
+import {Post} from "./models/post.model";
+import {PostService} from "./services/post.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   standalone: true,
-  imports: [CommonModule, SidebarComponent, TopbarComponent],
+  imports: [CommonModule, SidebarComponent, TopbarComponent, MainPageCardComponent],
   styleUrls: ['./app.component.css']
 })
 
 export class AppComponent implements OnInit {
   title = 'web-app';
+  posts!: Post[]
+
+  constructor(private postService: PostService) {
+  }
 
   ngOnInit(): void {
     initFlowbite();
+    this.posts = this.postService.getPosts()
   }
 }
