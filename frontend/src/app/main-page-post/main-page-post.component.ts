@@ -7,7 +7,7 @@ import {DateAgoPipe} from "../pipes/date-ago.pipe";
   selector: 'app-main-page-post',
   standalone: true,
   imports: [
-    DateAgoPipe
+    DateAgoPipe,
   ],
   templateUrl: './main-page-post.component.html',
   styleUrl: './main-page-post.component.css'
