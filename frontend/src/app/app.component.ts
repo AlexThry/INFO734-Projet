@@ -7,12 +7,13 @@ import {TopbarComponent} from "./topbar/topbar.component";
 import {MainPagePostComponent} from "./main-page-post/main-page-post.component";
 import {Post} from "./models/post.model";
 import {PostService} from "./services/post.service";
+import {MainPageLayoutComponent} from "./main-page-layout/main-page-layout.component";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   standalone: true,
-  imports: [CommonModule, SidebarComponent, TopbarComponent, MainPagePostComponent],
+    imports: [CommonModule, SidebarComponent, TopbarComponent, MainPagePostComponent, MainPageLayoutComponent],
   styleUrls: ['./app.component.css']
 })
 
