@@ -4,7 +4,7 @@ import { initFlowbite } from 'flowbite';
 import { CommonModule } from "@angular/common";
 import {SidebarComponent} from "./sidebar/sidebar.component";
 import {TopbarComponent} from "./topbar/topbar.component";
-import {MainPageCardComponent} from "./main-page-card/main-page-card.component";
+import {MainPagePostComponent} from "./main-page-post/main-page-post.component";
 import {Post} from "./models/post.model";
 import {PostService} from "./services/post.service";
 
@@ -12,7 +12,7 @@ import {PostService} from "./services/post.service";
   selector: 'app-root',
   templateUrl: './app.component.html',
   standalone: true,
-  imports: [CommonModule, SidebarComponent, TopbarComponent, MainPageCardComponent],
+  imports: [CommonModule, SidebarComponent, TopbarComponent, MainPagePostComponent],
   styleUrls: ['./app.component.css']
 })
 

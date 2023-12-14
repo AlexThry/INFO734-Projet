@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MainPageCardComponent } from './main-page-card.component';
+import { MainPagePostComponent } from './main-page-post.component';
 
 describe('MainPageCardComponent', () => {
-  let component: MainPageCardComponent;
-  let fixture: ComponentFixture<MainPageCardComponent>;
+  let component: MainPagePostComponent;
+  let fixture: ComponentFixture<MainPagePostComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MainPageCardComponent]
+      imports: [MainPagePostComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(MainPageCardComponent);
+
+    fixture = TestBed.createComponent(MainPagePostComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

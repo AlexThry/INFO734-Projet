@@ -4,15 +4,15 @@ import {PostService} from "../services/post.service";
 import {DateAgoPipe} from "../pipes/date-ago.pipe";
 
 @Component({
-  selector: 'app-main-page-card',
+  selector: 'app-main-page-post',
   standalone: true,
   imports: [
     DateAgoPipe
   ],
-  templateUrl: './main-page-card.component.html',
-  styleUrl: './main-page-card.component.css'
+  templateUrl: './main-page-post.component.html',
+  styleUrl: './main-page-post.component.css'
 })
-export class MainPageCardComponent {
+export class MainPagePostComponent {
   @Input() post!: Post
   imageStyle!: string
 
