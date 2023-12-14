@@ -1,3 +1,9 @@
-<app-sidebar></app-sidebar>
-<app-topbar></app-topbar>
-<app-main-page-card *ngFor="let post of posts" [post]="post"></app-main-page-card>
+<div>
+  <app-topbar></app-topbar>
+  <app-sidebar></app-sidebar>
+</div>
+<div class="mt-40 ml-80">
+  <app-main-page-card *ngFor="let post of posts" [post]="post"></app-main-page-card>
+</div>
+
+
