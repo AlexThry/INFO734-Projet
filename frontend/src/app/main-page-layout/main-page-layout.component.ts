@@ -5,6 +5,8 @@ import {Post} from "../models/post.model";
 import {MainPagePostComponent} from "../main-page-post/main-page-post.component";
 import {TopbarComponent} from "../topbar/topbar.component";
 import {ListPostComponent} from "../list-post/list-post.component";
+import {FullPostComponent} from "../full-post/full-post.component";
+import {RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-main-page-layout',
@@ -13,7 +15,9 @@ import {ListPostComponent} from "../list-post/list-post.component";
         SidebarComponent,
         MainPagePostComponent,
         TopbarComponent,
-        ListPostComponent
+        ListPostComponent,
+        FullPostComponent,
+        RouterOutlet
     ],
   templateUrl: './main-page-layout.component.html',
   styleUrl: './main-page-layout.component.css'
