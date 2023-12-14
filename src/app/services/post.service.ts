@@ -25,6 +25,24 @@ export class PostService {
       liked: false,
       imageUrl: "https://www.powertrafic.fr/wp-content/uploads/2023/04/image-ia-exemple.png"
     },
+    {
+      id: 3,
+      authorImageUrl: "https://flowbite.com/docs/images/people/profile-picture-5.jpg",
+      author: "Alexis Thierry",
+      time: new Date(),
+      description: "Une superbe photo",
+      liked: false,
+      imageUrl: "https://www.powertrafic.fr/wp-content/uploads/2023/04/image-ia-exemple.png"
+    },
+    {
+      id: 4,
+      authorImageUrl: "https://flowbite.com/docs/images/people/profile-picture-5.jpg",
+      author: "Alexis Thierry",
+      time: new Date(),
+      description: "Une superbe photo",
+      liked: false,
+      imageUrl: "https://www.powertrafic.fr/wp-content/uploads/2023/04/image-ia-exemple.png"
+    },
   ]
 
   constructor() { }
