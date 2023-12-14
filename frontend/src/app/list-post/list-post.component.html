@@ -1,3 +1,5 @@
-@for (post of listPosts; track post){
-  <app-main-page-post [post]="post"></app-main-page-post>
-}
+<div class="flex flex-col items-center mt-28">
+    @for (post of listPosts; track post){
+        <app-main-page-post class="w-[90%] -sm:w-[100%] max-w-[700px] mb-10" [post]="post"></app-main-page-post>
+    }
+</div>
