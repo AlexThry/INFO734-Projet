@@ -4,8 +4,6 @@
     </div>
     <div class="h-screen md:w-[calc(100%-16rem)] md:ml-[16rem] -md:w-full">
         <app-topbar></app-topbar>
-        @for (post of posts; track post) {
-            <app-main-page-post [post]=post></app-main-page-post>
-        }
+        <app-list-post></app-list-post>
     </div>
 </div>

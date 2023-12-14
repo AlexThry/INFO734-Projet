@@ -4,15 +4,17 @@ import {PostService} from "../services/post.service";
 import {Post} from "../models/post.model";
 import {MainPagePostComponent} from "../main-page-post/main-page-post.component";
 import {TopbarComponent} from "../topbar/topbar.component";
+import {ListPostComponent} from "../list-post/list-post.component";
 
 @Component({
   selector: 'app-main-page-layout',
   standalone: true,
-  imports: [
-    SidebarComponent,
-    MainPagePostComponent,
-    TopbarComponent
-  ],
+    imports: [
+        SidebarComponent,
+        MainPagePostComponent,
+        TopbarComponent,
+        ListPostComponent
+    ],
   templateUrl: './main-page-layout.component.html',
   styleUrl: './main-page-layout.component.css'
 })
