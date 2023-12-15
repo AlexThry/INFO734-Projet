@@ -4,11 +4,11 @@ const userCtrl = require('../controllers/user');
 
 const router = express.Router();
 
-router.post('/', userCtrl.createUser);
+router.post('/create', userCtrl.createUser);
 router.post('/signup', userCtrl.signup);
 router.post('/login', userCtrl.login);
 
-router.put('/:id', userCtrl.updateUser);
+router.put('/update/:id', userCtrl.updateUser);
 router.put('/newFollowing', userCtrl.newFollowingUser);
 router.put('/newFollower', userCtrl.newFollowerUser);
 

@@ -5,6 +5,8 @@ const router = express.Router();
 const app = express();
 
 const userRoutes = require('./routes/user');
+const postRoutes = require('./routes/post');
+
 
 // BDD Connexion
 const url = 'mongodb://tplebani:info734@193.48.125.44/tplebani?authMechanism=DEFAULT&authSource=admin';
@@ -30,6 +32,7 @@ app.use((req, res, next) => {
 
 // ROUTES
 app.use('/api/user', userRoutes);
+app.use('/api/post', postRoutes);
   
 
 module.exports = app;
