@@ -1,5 +1,7 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+
 
 // CREATE
 exports.createUser = (req, res, next) => {
@@ -57,7 +59,7 @@ exports.deleteUser = (req, res, next) => {
 // GET BY ID
 exports.getByIdUser = (req, res, next) => {
     User.findOne({ _id: req.params.id })
-    .then(thing => res.status(200).json(thing))
+    .then(user => res.status(200).json(user))
     .catch(error => res.status(404).json({ error }));
 }
 
@@ -86,30 +88,33 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
+
     User.findOne({email: req.body.email})
         .then(user => {
             if(!user) {
                 return res.status(401).json({message: "User doesn't exist"});
             }
+            
 
             bcrypt.compare(req.body.password, user.password)
-                then(valid => {
-                    if (!valid) {
-                        return res.status(401).json({message: "Password incorrect"});
-                    }
+            .then(valid => {
+                if (!valid) {
+                    return res.status(401).json({message: "Password incorrect"});
+                }
 
-                    res.status(200).json({
-                        userId: user._id, 
-                        token: jwt.sign(
-                            {userId: user._id},
-                            'RANDOM_TOKEN_SECRET',
-                            {expiresIn: '24h'}
-                        )
-                    });
-                })
-                .catch(error => res.status(500).json({ error }));
+                res.status(200).json({
+                    userId: user._id, 
+                    token: jwt.sign(
+                        {userId: user._id},
+                        'RANDOM_TOKEN_SECRET',
+                        {expiresIn: '24h'}
+                    )
+                });
+            })
+            .catch(error => res.status(500).json({ prout: "prout" }));
         })
-        .catch(error => res.status(500).json({ error }));
+        .catch(error => res.status(500).json({ err: "lala" }));
+
 };
 
 
