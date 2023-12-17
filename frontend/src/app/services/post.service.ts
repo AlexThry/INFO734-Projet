@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Post} from "../models/post.model";
+import {Account} from "../models/account.model";
 
 @Injectable({
     providedIn: 'root'
@@ -66,5 +67,15 @@ export class PostService {
     onPostLike(postId: number) {
         const post = this.getPostById(postId)
         post.liked = !post.liked
+    }
+
+    getPostsBySearch(content:string):Post[]{
+        let listePosts: Post[] = []
+        for (const a of this.posts){
+            if (a.description.toLowerCase().includes(content.toLowerCase())){
+                listePosts.push(a)
+            }
+        }
+        return listePosts
     }
 }
