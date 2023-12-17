@@ -1,1 +1,7 @@
-<app-main-page-layout></app-main-page-layout>
+@if (isRoute("/register")){
+    <app-register-page></app-register-page>
+} @else if (isRoute("/")){
+    <app-login-page></app-login-page>
+} @else {
+    <app-main-page-layout></app-main-page-layout>
+}
