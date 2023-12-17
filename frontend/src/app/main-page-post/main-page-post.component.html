@@ -7,7 +7,8 @@
             <p class="text-xs -sm:text-xxs">{{ this.post.time | dateAgo }}</p>
         </div>
     </a>
-    <div class="relative w-full h-96 rounded-xl bg-center bg-cover cursor-pointer" [style.background-image]=this.imageStyle (click)="onViewCard()">
+    <div class="relative w-full h-96 rounded-xl bg-center bg-cover cursor-pointer">
+        <img src="{{this.post.imageUrl}}" (click)="onViewCard()" alt="{{this.post.authorImageUrl}}" class="relative w-full h-96 rounded-xl bg-center object-cover cursor-pointer">
         <div class="absolute flex justify-around items-center h-10 w-36 right-4 bottom-0 translate-y-1/2 rounded-lg bg-gray-300 bg-opacity-50 backdrop-blur ring-2 ring-white -md:h-8 -md:w-28 -sm:h-7 -sm:w-24">
             <a>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
