@@ -18,7 +18,7 @@
     </div>
     <div id="bottom" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-12 border-t-2 border-gray-100 w-[90%] -sm:w-[100%] -sm:px-10 mb-10">
         @for (post of this.account.posts; track post){
-            <a href="" class="h-full cursor-pointer">
+            <a routerLink="/posts/{{post.id}}" class="h-full cursor-pointer">
                 <img class="object-cover h-56 w-full max-w-full rounded-lg" src="{{ post.imageUrl }}" alt="{{post.author}}">
             </a>
         }

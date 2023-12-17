@@ -2,13 +2,15 @@ import {Component, Input} from '@angular/core';
 import {Post} from "../models/post.model";
 import {Account} from "../models/account.model";
 import {PostService} from "../services/post.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {AccountService} from "../services/account.service";
 
 @Component({
   selector: 'app-account-page',
   standalone: true,
-  imports: [],
+  imports: [
+    RouterLink
+  ],
   templateUrl: './account-page.component.html',
   styleUrl: './account-page.component.css'
 })
