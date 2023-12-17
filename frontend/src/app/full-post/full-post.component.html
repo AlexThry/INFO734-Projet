@@ -1,4 +1,11 @@
 <div class="w-full max-w-[90%] select-none my-4 mx-auto flex -lg:block mt-28">
+    <div class="pt-2 absolute -lg:relative">
+        <button routerLink="">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+        </button>
+    </div>
     <a class="mb-4 hidden -lg:flex items-center border-b-2 border-gray-100 py-4">
         <img class="w-20 h-20 mr-2 p-0.5 rounded-full ring-2 ring-pink-500 dark:ring-pink-700 -sm:w-8 -sm:h-8"
              src="{{ this.post.authorImageUrl }}" alt="Bordered avatar">
@@ -55,6 +62,5 @@
         </a>
         <p class="-lg:pt-28">{{ this.post.description }}</p>
     </div>
-
 </div>
 

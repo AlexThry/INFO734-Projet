@@ -2,14 +2,15 @@ import {Component, Input} from '@angular/core';
 import {DateAgoPipe} from "../pipes/date-ago.pipe";
 import {Post} from "../models/post.model";
 import {PostService} from "../services/post.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-full-post',
   standalone: true,
-  imports: [
-    DateAgoPipe
-  ],
+    imports: [
+        DateAgoPipe,
+        RouterLink
+    ],
   templateUrl: './full-post.component.html',
   styleUrl: './full-post.component.css'
 })
