@@ -5,9 +5,11 @@ import {AccountPageComponent} from "./account-page/account-page.component";
 import {SearchPageComponent} from "./search-page/search-page.component";
 import {LoginPageComponent} from "./login-page/login-page.component";
 import {RegisterPageComponent} from "./register-page/register-page.component";
+import {NewPostPageComponent} from "./new-post-page/new-post-page.component";
 
 export const routes: Routes = [
     {path: 'posts/:id', component: FullPostComponent},
+    {path: 'create', component: NewPostPageComponent},
     {path: 'account/:id', component: AccountPageComponent},
     {path: 'search/:content', component: SearchPageComponent},
     {path: 'home', component: ListPostComponent},

@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {PostService} from "../services/post.service";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    RouterLink
   ],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.css'
