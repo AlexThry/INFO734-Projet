@@ -22,7 +22,7 @@ export class RegisterPageComponent {
     this.submit = true;
 
     if (f.value.username != "" && f.value.email != "" && f.value.password != ""){
-      this.router.navigateByUrl("/")
+      this.router.navigateByUrl("/home")
     }
   }
 }
