@@ -12,12 +12,20 @@ import {NgForOf} from "@angular/common";
   styleUrl: './list-post.component.css'
 })
 export class ListPostComponent implements OnInit{
-  listPosts!: Post[];
+  posts!: Post[];
 
   constructor(private postService: PostService) {
   }
+
   ngOnInit() {
-    this.listPosts = this.postService.getPosts();
+    this.postService.getAllPost()
+      .subscribe(data => {
+        this.posts = data;            
+      })      
+  }
+
+  postsAreLoaded() {
+    return this.posts !== undefined;
   }
 }
 

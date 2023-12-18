@@ -21,7 +21,9 @@ export class MainPagePostComponent {
               private router : Router) {}
 
   ngOnInit() {
-    this.imageStyle = "url(" + this.post.imageUrl + ")"
+    this.imageStyle = "url(" + this.post.image_url + ")";
+    console.log(this.post);
+    
   }
   onViewCard() {
     this.router.navigateByUrl(`posts/${this.post.id}`)
