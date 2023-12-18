@@ -21,7 +21,7 @@ export class RegisterPageComponent {
 
     this.submit = true;
 
-    if (f.value.username != "" && f.value.email != "" && f.value.password != ""){
+    if (f.value.username != "" && f.value.email != "" && f.value.picture != "" && f.value.password != ""){
       this.router.navigateByUrl("/home")
     }
   }
