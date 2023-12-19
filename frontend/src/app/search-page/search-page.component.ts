@@ -26,9 +26,9 @@ export class SearchPageComponent {
               private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.searchContent = this.route.snapshot.params['content'];
-    this.accounts = this.accountService.getAccountsBySearch(this.searchContent);
-    this.posts = this.postService.getPostsBySearch(this.searchContent);
+    // this.searchContent = this.route.snapshot.params['content'];
+    // this.accounts = this.accountService.getAccountsBySearch(this.searchContent);
+    // this.posts = this.postService.getPostsBySearch(this.searchContent);
   }
 
 }

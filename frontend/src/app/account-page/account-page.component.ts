@@ -23,7 +23,7 @@ export class AccountPageComponent {
               private route: ActivatedRoute) {}
   ngOnInit() {
     const accountId = +this.route.snapshot.params['id'];
-    this.account = this.accountService.getAccountById(accountId);
+    // this.account = this.accountService.getAccountById(accountId);
   }
 
   protected readonly length = length;

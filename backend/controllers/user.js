@@ -9,7 +9,8 @@ exports.createUser = (req, res, next) => {
   const user = new User({
     username: req.body.username,
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    photo_url: "proutPHOTO"
   });
 
   user.save()

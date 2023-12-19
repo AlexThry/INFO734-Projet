@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         initFlowbite();
-        this.posts = this.postService.getPosts()
+        // this.posts = this.postService.getPosts()
     }
 
     isRoute(route: string): boolean {

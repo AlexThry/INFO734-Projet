@@ -3,6 +3,7 @@ import {MainPagePostComponent} from "../main-page-post/main-page-post.component"
 import {Post} from "../models/post.model";
 import {PostService} from "../services/post.service";
 import {NgForOf} from "@angular/common";
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-list-post',
@@ -12,12 +13,28 @@ import {NgForOf} from "@angular/common";
   styleUrl: './list-post.component.css'
 })
 export class ListPostComponent implements OnInit{
-  listPosts!: Post[];
+  posts!: Post[];
+  postTest!: Post;
 
-  constructor(private postService: PostService) {
+  constructor(private postService: PostService,
+              private userService: UserService) {
   }
+
   ngOnInit() {
-    this.listPosts = this.postService.getPosts();
+    this.postService.getAllPost()
+      .subscribe(data => {
+        this.posts = data;            
+      })
+
+      this.userService.getByIdUser('657b47c90a157aa8e0d66d87')
+        .subscribe(data => {
+          // console.log(data);
+          
+        });
+  }
+
+  postsAreLoaded() {
+    return this.posts !== undefined;
   }
 }
 

@@ -28,6 +28,6 @@ export class MainPageLayoutComponent {
   }
 
   ngOnInit() {
-    this.posts = this.postService.getPosts()
+    // this.posts = this.postService.getPosts()
   }
 }

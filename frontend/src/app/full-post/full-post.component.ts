@@ -20,9 +20,9 @@ export class FullPostComponent {
 
   constructor(protected postService: PostService, private route: ActivatedRoute) {}
 
-  ngOnInit() {
-    const postId = +this.route.snapshot.params['id'];
-    this.post = this.postService.getPostById(postId);
-    this.imageStyle = "url(" + this.post.imageUrl + ")"
-  }
+  // ngOnInit() {
+  //   const postId = +this.route.snapshot.params['id'];
+  //   this.post = this.postService.getPostById(postId);
+  //   this.imageStyle = "url(" + this.post.imageUrl + ")"
+  // }
 }
