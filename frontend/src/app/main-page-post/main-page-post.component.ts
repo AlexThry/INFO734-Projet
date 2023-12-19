@@ -16,13 +16,18 @@ import {Router} from "@angular/router";
 export class MainPagePostComponent {
   @Input() post!: Post
   imageStyle!: string
+  isLike!: boolean
+  nbLike!: number
 
   constructor(protected postService: PostService,
               private router : Router) {}
 
   ngOnInit() {
     this.imageStyle = "url(" + this.post.image_url + ")";
-    console.log(this.post);
+    this.isLike = this.isLikeByConnectedUser();
+    this.nbLike = this.post.likes.length
+
+    console.log(this.isLike);
     
   }
 
@@ -45,11 +50,15 @@ export class MainPagePostComponent {
     // TODO - Récupérer l'id de l'user connected
     const userConnectedID = "657c380b55f994f1b9fd2fdb";
 
-    if (this.post.likes.includes(userConnectedID)) {
+    this.isLike = !this.isLike;
+
+    if (!this.isLike) {
       this.postService.actionPostById(this.post.id, userConnectedID, 'unlike');
+      this.nbLike -= 1;
     }
     else {
       this.postService.actionPostById(this.post.id, userConnectedID, 'like');
+      this.nbLike += 1;
     }
   }
 
