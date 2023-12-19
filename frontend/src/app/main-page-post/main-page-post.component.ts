@@ -25,8 +25,32 @@ export class MainPagePostComponent {
     console.log(this.post);
     
   }
+
+  userIsLoaded() {
+    return this.post.user !== undefined;
+  }
+
   onViewCard() {
     this.router.navigateByUrl(`posts/${this.post.id}`)
+  }
+
+  isLikeByConnectedUser() {
+    // TODO - Récupérer l'id de l'user connected
+    const userConnectedID = "657c380b55f994f1b9fd2fdb";
+    
+    return this.post.likes.includes(userConnectedID);
+  }
+
+  onPostLike() {
+    // TODO - Récupérer l'id de l'user connected
+    const userConnectedID = "657c380b55f994f1b9fd2fdb";
+
+    if (this.post.likes.includes(userConnectedID)) {
+      this.postService.actionPostById(this.post.id, userConnectedID, 'unlike');
+    }
+    else {
+      this.postService.actionPostById(this.post.id, userConnectedID, 'like');
+    }
   }
 
 }

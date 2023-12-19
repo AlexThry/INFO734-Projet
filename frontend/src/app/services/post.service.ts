@@ -1,14 +1,17 @@
 import {Injectable} from '@angular/core';
 import {Post} from "../models/post.model";
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
+import { catchError, forkJoin, map, Observable, switchMap } from 'rxjs';
+import { UserService } from './user.service';
+import { User } from '../models/user.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class PostService {
 
-    constructor(private http: HttpClient) {};
+    constructor(private http: HttpClient,
+                private userService: UserService) {};
 
     // posts: Post[] = [
     //     {
@@ -51,28 +54,99 @@ export class PostService {
     //     },
     // ]
 
-    getAllPost() {
+    // getAllPost() {
+    //     const url = 'http://localhost:3000/api/post/';
+    
+    //     return this.http.get<any>(url).pipe(
+    //       map((data: any) => {
+    //         // console.log(data);
+            
+    //         return data.map((post: any) => {
+    //             let user!: User;
+    //             this.userService.getByIdUser(post.user_id)
+    //                 .subscribe(data => user = data)
+                
+    //             return new Post(
+    //                 post._id, 
+    //                 post.user_id, 
+    //                 post.image_url,
+    //                 post.description, 
+    //                 post.likes, 
+    //                 post.comments, 
+    //                 post.timestamp,
+    //                 user
+    //             )
+    //         });
+            
+    //       })
+    //     );
+    // }
+
+    getAllPost(): Observable<Post[]> {
         const url = 'http://localhost:3000/api/post/';
     
         return this.http.get<any>(url).pipe(
-          map((data: any) => {
-            // console.log(data);
+          switchMap((posts: any[]) => {
+            const userRequests: Observable<User>[] = posts.map(post => this.userService.getByIdUser(post.user_id));
             
-            return data.map((post: any) => {
-                return new Post(
-                    post._id, 
-                    post.user_id, 
+            return forkJoin(userRequests).pipe(
+              map((users: User[]) => {
+                return posts
+                  .filter((post, index) => users[index] !== undefined) // Exclure les posts avec un utilisateur undefined
+                  .map((post, index) => new Post(
+                    post._id,
+                    post.user_id,
                     post.image_url,
-                    post.description, 
-                    post.likes, 
-                    post.comments, 
-                    post.timestamp
-                )
-            });
-            
+                    post.description,
+                    post.likes,
+                    post.comments,
+                    post.timestamp,
+                    users[index]
+                  ));
+              })
+            );
           })
         );
     }
+
+    actionPostById(postId: number, userConnectedID: string, action: 'like' | 'unlike') {
+        
+
+        if (action == 'like') {
+            this.likePost(postId, userConnectedID);
+        }
+        else if (action == 'unlike') {
+            this.unlikePost(postId, userConnectedID);
+        }
+    }
+
+    likePost(postId: number, userConnectedID: string) {
+        const url = 'http://localhost:3000/api/post/addLike/' + postId.toString();
+    
+        let data = {'userId': userConnectedID};
+
+        this.http.put(url, data)
+            .subscribe(
+                response => { console.log(response) },
+                error => { console.error(error) }
+            );
+    }
+
+    unlikePost(postId: number, userConnectedID: string) {
+        const url = 'http://localhost:3000/api/post/removeLike/' + postId;
+
+        console.log(url);
+        
+    
+        let data = {'userId': userConnectedID};
+
+        this.http.put(url, data)
+            .subscribe(
+                response => { console.log(response) },
+                error => { console.error(error) }
+            );
+    }
+
 
     // getPostById(postId: number) {
     //     const post = this.posts.find(post => post.id === postId)

@@ -21,6 +21,20 @@ exports.updatePost = (req, res, next) => {
     .catch(error => res.status(400).json({ error }));
 }
 
+// ADD LIKE 
+exports.likePost = (req, res, next) => {
+    Post.updateOne({ _id: req.params.id }, { $addToSet: {likes: req.body.userId}, _id: req.params.id })
+      .then(() => res.status(200).json({ message: 'Le user a bien été ajouté à la liste de likes du post'}))
+      .catch(error => res.status(400).json({ error }));
+}
+
+// REMOVE LIKE 
+exports.unlikePost = (req, res, next) => {
+    Post.updateOne({ _id: req.params.id }, { $pull: {likes: req.body.userId}, _id: req.params.id })
+      .then(() => res.status(200).json({ message: 'Le user a bien été retiré de la liste de likes du post'}))
+      .catch(error => res.status(400).json({ error }));
+}
+
 // DELETE
 exports.deletePost = (req, res, next) => {
     Post.deleteOne({ _id: req.params.id })

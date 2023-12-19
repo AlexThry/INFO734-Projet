@@ -10,7 +10,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { };
 
-  getByIdUser(id: number) {
+  getByIdUser(id: string) {
     let url = `http://localhost:3000/api/user/${id}`
 
         return this.http.get<any>(url)
@@ -20,6 +20,7 @@ export class UserService {
                 data.username, 
                 data.email, 
                 data.password,
+                data.photo_url,
                 data.followers, 
                 data.following,
                 data.posts
