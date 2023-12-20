@@ -27,7 +27,7 @@ export class MainPagePostComponent {
     this.isLike = this.isLikeByConnectedUser();
     this.nbLike = this.post.likes.length
 
-    console.log(this.isLike);
+    // console.log(this.isLike);
     
   }
 
@@ -35,8 +35,8 @@ export class MainPagePostComponent {
     return this.post.user !== undefined;
   }
 
-  onViewCard() {
-    this.router.navigateByUrl(`posts/${this.post.id}`)
+  onViewPost() {
+    this.router.navigateByUrl(`post/${this.post.id}`)
   }
 
   isLikeByConnectedUser() {

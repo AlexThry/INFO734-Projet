@@ -110,6 +110,31 @@ export class PostService {
         );
     }
 
+    getPostById(id: number) {
+        const url = `http://localhost:3000/api/post/${id}`;
+      
+        return this.http.get<Post>(url)
+          .pipe(
+            switchMap((post: any) => {
+              return this.userService.getByIdUser(post.user_id)
+                .pipe(
+                  map(user => {
+                    return new Post(
+                        post._id,
+                        post.user_id,
+                        post.image_url,
+                        post.description,
+                        post.likes,
+                        post.comments,
+                        post.timestamp,
+                        user
+                    );
+                  })
+                );
+            })
+          );
+      }
+
     actionPostById(postId: number, userConnectedID: string, action: 'like' | 'unlike') {
         
 
