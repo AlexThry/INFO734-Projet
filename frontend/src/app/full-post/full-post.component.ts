@@ -17,12 +17,52 @@ import {ActivatedRoute, RouterLink} from "@angular/router";
 export class FullPostComponent {
   @Input() post!: Post
   imageStyle!: string
+  isLike!: boolean
+  nbLike!: number
 
   constructor(protected postService: PostService, private route: ActivatedRoute) {}
 
-  // ngOnInit() {
-  //   const postId = +this.route.snapshot.params['id'];
-  //   this.post = this.postService.getPostById(postId);
-  //   this.imageStyle = "url(" + this.post.imageUrl + ")"
-  // }
+  ngOnInit() {
+    const postId = this.route.snapshot.params['id'];
+
+    this.postService.getPostById(postId)
+      .subscribe(data => {
+        this.post = data;
+        this.imageStyle = "url(" + this.post.image_url + ")";
+
+        this.isLike = this.isLikeByConnectedUser();
+        this.nbLike = this.post.likes.length
+      });
+
+    
+
+    
+  }
+
+  postIsLoaded() {
+    return this.post !== undefined
+  }
+
+  isLikeByConnectedUser() {
+    // TODO - Récupérer l'id de l'user connected
+    const userConnectedID = "657c380b55f994f1b9fd2fdb";
+    
+    return this.post.likes.includes(userConnectedID);
+  }
+
+  onPostLike() {
+    // TODO - Récupérer l'id de l'user connected
+    const userConnectedID = "657c380b55f994f1b9fd2fdb";
+
+    this.isLike = !this.isLike;
+
+    if (!this.isLike) {
+      this.postService.actionPostById(this.post.id, userConnectedID, 'unlike');
+      this.nbLike -= 1;
+    }
+    else {
+      this.postService.actionPostById(this.post.id, userConnectedID, 'like');
+      this.nbLike += 1;
+    }
+  }
 }
