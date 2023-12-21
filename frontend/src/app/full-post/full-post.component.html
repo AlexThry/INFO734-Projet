@@ -13,7 +13,7 @@
                 <img class="w-20 h-20 mr-2 p-0.5 rounded-full ring-2 ring-pink-500 dark:ring-pink-700 -sm:w-8 -sm:h-8"
                     src="{{ this.post.user.photo_url }}" alt="Bordered avatar">
                 <div>
-                    <p class="font-bold text-2xl">{{ this.post.user.username }}</p>
+                    <a routerLink="/account/{{this.post.user_id}}" class="cursor-pointer"><p class="font-bold text-2xl">{{ this.post.user.username }}</p></a>
                     <p class="text-lg">{{ this.post.timestamp | dateAgo }}</p>
                 </div>
             </a>
