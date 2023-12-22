@@ -3,6 +3,8 @@ import {DateAgoPipe} from "../pipes/date-ago.pipe";
 import {Post} from "../models/post.model";
 import {PostService} from "../services/post.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
+import {CommentService} from "../services/comment.service";
+import {Comment} from "../models/comment.model";
 
 @Component({
   selector: 'app-full-post',
@@ -19,8 +21,13 @@ export class FullPostComponent {
   imageStyle!: string
   isLike!: boolean
   nbLike!: number
+  comments!: Comment[]
 
-  constructor(protected postService: PostService, private route: ActivatedRoute) {}
+  constructor(
+      protected postService: PostService,
+      private commentService: CommentService,
+      private route: ActivatedRoute,
+  ) {}
 
   ngOnInit() {
     const postId = this.route.snapshot.params['id'];
@@ -31,7 +38,11 @@ export class FullPostComponent {
         this.imageStyle = "url(" + this.post.image_url + ")";
 
         this.isLike = this.isLikeByConnectedUser();
-        this.nbLike = this.post.likes.length
+        this.nbLike = this.post.likes.length;
+        this.commentService.getAllCommentsByPostId(this.post.id)
+            .subscribe(data => {
+              this.post.setListComment(data)
+            })
       });
 
     
