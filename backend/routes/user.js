@@ -14,7 +14,7 @@ router.put('/newFollower', userCtrl.newFollowerUser);
 
 router.delete('/delete/:id', userCtrl.deleteUser);
 
-router.get('/:id', userCtrl.getByIdUser);
+router.get('/:id', userCtrl.getUserById);
 router.get('/', userCtrl.getAllUser);
 
 

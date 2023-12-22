@@ -5,14 +5,16 @@ import {PostService} from "../services/post.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {CommentService} from "../services/comment.service";
 import {Comment} from "../models/comment.model";
+import {CommentListComponent} from "../comment-list/comment-list.component";
 
 @Component({
   selector: 'app-full-post',
   standalone: true,
-    imports: [
-        DateAgoPipe,
-        RouterLink
-    ],
+  imports: [
+    DateAgoPipe,
+    RouterLink,
+    CommentListComponent
+  ],
   templateUrl: './full-post.component.html',
   styleUrl: './full-post.component.css'
 })

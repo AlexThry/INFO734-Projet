@@ -57,7 +57,7 @@ exports.deleteUser = (req, res, next) => {
 }
 
 // GET BY ID
-exports.getByIdUser = (req, res, next) => {
+exports.getUserById = (req, res, next) => {
     User.findOne({ _id: req.params.id })
     .then(user => res.status(200).json(user))
     .catch(error => res.status(404).json({ error }));
