@@ -2,12 +2,14 @@
     <div class="p-4 mt-10 mb-6 border-2 rounded-xl flex flex-col w-full">
 
         @for (comment of this.commentList; track comment) {
-            <div class="flex items-center w-full">
-                <a routerLink="/account/{{comment.user.id}}">
-                    <img class="w-10 h-10 mr-5 p-0.5 rounded-full ring-2 ring-pink-500 dark:ring-pink-700 -sm:w-8 -sm:h-8"
-                         src="{{ comment.user.photo_url }}" alt="Bordered avatar">
-                </a>
-                <div>{{comment.content}}</div>
+            <div class="flex items-center">
+                <div class="flex items-center w-14">
+                    <a routerLink="/account/{{comment.user.id}}">
+                        <img class="w-10 h-10 mr-3 p-0.5 rounded-full ring-2 ring-pink-500 dark:ring-pink-700 -sm:w-8 -sm:h-8"
+                             src="{{ comment.user.photo_url }}" alt="Bordered avatar">
+                    </a>
+                </div>
+                <div class="w-full">{{comment.content}}</div>
             </div>
             @if (!(this.commentList.at(this.commentList.length - 1) === comment)) {
                 <hr class="my-4">
@@ -15,7 +17,7 @@
         }
     </div>
     <div class="mb-6 flex justify-center">
-        <a (click)="loadMore()" class="px-4 py-2 rounded-xl hover:bg-gray-200">Charger plus</a>
+        <a (click)="loadMore()" class="px-4 py-2 rounded-xl hover:bg-gray-200 cursor-pointer">Voir plus</a>
     </div>
 } @placeholder {
 
