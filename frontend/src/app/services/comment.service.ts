@@ -21,7 +21,7 @@ export class CommentService {
         const commentObservables: Observable<Comment>[] = comments.map(
           (comment) => {
             return this.userService
-              .getByIdUser(comment.user_id)
+              .getUserById(comment.user_id)
               .pipe(
                 map(
                   (user) =>
@@ -48,7 +48,7 @@ export class CommentService {
         const commentObservables: Observable<Comment>[] = comments.map(
           (comment) => {
             return this.userService
-              .getByIdUser(comment.user_id)
+              .getUserById(comment.user_id)
               .pipe(
                 map(
                   (user) =>
