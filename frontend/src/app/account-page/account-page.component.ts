@@ -1,30 +1,35 @@
-import {Component, Input} from '@angular/core';
-import {Post} from "../models/post.model";
-import {Account} from "../models/account.model";
-import {PostService} from "../services/post.service";
-import {ActivatedRoute, RouterLink} from "@angular/router";
-import {AccountService} from "../services/account.service";
+import { Component, Input } from "@angular/core";
+import { Post } from "../models/post.model";
+import { PostService } from "../services/post.service";
+import { ActivatedRoute, RouterLink } from "@angular/router";
+import { User } from "../models/user.model";
+import { UserService } from "../services/user.service";
+import { AccountPostListComponent } from "../account-post-list/account-post-list.component";
 
 @Component({
-  selector: 'app-account-page',
+  selector: "app-account-page",
   standalone: true,
-  imports: [
-    RouterLink
-  ],
-  templateUrl: './account-page.component.html',
-  styleUrl: './account-page.component.css'
+  imports: [RouterLink, AccountPostListComponent],
+  templateUrl: "./account-page.component.html",
+  styleUrl: "./account-page.component.css",
 })
 export class AccountPageComponent {
-  @Input() post!: Post
-  @Input() account!: Account
+  user!: User;
+  posts!: Post[];
 
-  constructor(protected postService: PostService,
-              protected accountService: AccountService,
-              private route: ActivatedRoute) {}
+  constructor(
+    protected postService: PostService,
+    private userService: UserService,
+    private route: ActivatedRoute,
+  ) {}
   ngOnInit() {
-    const accountId = +this.route.snapshot.params['id'];
-    // this.account = this.accountService.getAccountById(accountId);
+    const userId = this.route.snapshot.params["id"];
+    this.userService.getUserById(userId).subscribe((user) => {
+      this.user = user;
+    });
   }
 
-  protected readonly length = length;
+  userIsLoaded() {
+    return this.user !== undefined;
+  }
 }
