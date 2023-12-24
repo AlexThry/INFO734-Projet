@@ -1,0 +1,55 @@
+<button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button" class="fixed z-[45] items-center p-4 mt-2 ms-3 text-md text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+  <span class="sr-only">Open sidebar</span>
+  <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
+  </svg>
+</button>
+
+<aside id="default-sidebar" class="fixed top-0 left-0 z-50 w-64 h-screen transition-transform -translate-x-full md:translate-x-0" aria-label="Sidebar">
+  <div class="h-full px-3 py-10 pt-5 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+
+    <span class="flex items-center justify-center pb-16 whitespace-nowrap text-2xl">APPLICATION</span>
+
+    <div class="justify-center items-center flex flex-col">
+      <img class="w-40 h-40 p-1 rounded-full ring-2 ring-pink-600 dark:ring-gray-500" src="https://cdn.pixabay.com/photo/2023/12/07/11/11/girl-8435340_1280.png" alt="Bordered avatar">
+      <span class="flex-1 py-3 text-xl font-semibold whitespace-nowrap text-gray-700">My account</span>
+    </div>
+
+    <ul class="space-y-5 py-10 font-medium">
+      <li>
+        <a routerLink="/home" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-pink-500 dark:hover:bg-gray-700 group">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+            </svg>
+          <span class="flex-1 ms-3 whitespace-nowrap group-hover:text-white text-gray-700">Home</span>
+        </a>
+      </li>
+      <li>
+        <a class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-pink-500 dark:hover:bg-gray-700 group">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+            </svg>
+
+          <span class="flex-1 ms-3 whitespace-nowrap group-hover:text-white text-gray-700">Messages</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="account/1" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-pink-500 dark:hover:bg-gray-700 group">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+            </svg>
+          <span class="flex-1 ms-3 whitespace-nowrap group-hover:text-white text-gray-700">Account</span>
+        </a>
+      </li>
+        <li>
+            <a routerLink="" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-pink-500 dark:hover:bg-gray-700 group">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                </svg>
+                <span class="flex-1 ms-3 whitespace-nowrap group-hover:text-white text-gray-700">Logout</span>
+            </a>
+        </li>
+    </ul>
+  </div>
+
+</aside>
