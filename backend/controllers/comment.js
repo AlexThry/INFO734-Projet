@@ -43,13 +43,12 @@ exports.getCommentsByPostId = (req, res, next) => {
     .catch((error) => res.status(404).json({ error }));
 };
 
-// GET COMMENT BY POST ID FROM A TO B
-exports.getCommentsByPostIdLimit = (req, res, next) => {
-  const n = parseInt(req.params.limit) || 10;
-
+// GET COMMENT BY POST ID FROM => LIMIT
+exports.getCommentsByPostIdFromLimit = (req, res, next) => {
   Comment.find({ post_id: req.params.post_id })
     .sort({ timestamp: -1 })
-    .limit(n)
+    .skip(req.params.start)
+    .limit(req.params.end)
     .then((comment) => res.status(200).json(comment))
     .catch((error) => res.status(404).json({ error }));
 };
