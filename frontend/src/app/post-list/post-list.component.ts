@@ -6,15 +6,15 @@ import { NgForOf } from "@angular/common";
 import { UserService } from "../services/user.service";
 
 @Component({
-  selector: "app-list-post",
+  selector: "app-post-list",
   standalone: true,
   imports: [MainPagePostComponent, NgForOf],
-  templateUrl: "./list-post.component.html",
-  styleUrl: "./list-post.component.css",
+  templateUrl: "./post-list.component.html",
+  styleUrl: "./post-list.component.css",
 })
-export class ListPostComponent implements OnInit {
+export class PostListComponent implements OnInit {
   posts!: Post[];
-  postTest!: Post;
+  loaded!: number;
 
   constructor(
     private postService: PostService,
@@ -22,7 +22,8 @@ export class ListPostComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.postService.getAllPost().subscribe((data) => {
+    this.loaded = 10;
+    this.postService.getPostsFromLimit(0, this.loaded).subscribe((data) => {
       this.posts = data;
     });
 
@@ -35,5 +36,13 @@ export class ListPostComponent implements OnInit {
 
   postsAreLoaded() {
     return this.posts !== undefined;
+  }
+
+  loadMore() {
+    this.postService
+      .getPostsFromLimit(this.loaded, this.loaded + 10)
+      .subscribe((posts) => {
+        this.posts.push(...posts);
+      });
   }
 }

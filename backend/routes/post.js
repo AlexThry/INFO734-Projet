@@ -16,8 +16,9 @@ router.get("/:id", postCtrl.getByIdPost);
 router.get("/user/:user_id", postCtrl.getFromUserIdPost);
 router.get("/", postCtrl.getAllPost);
 router.get(
-  "/user/:user_id/start=:start&end=:end",
+  "/user/:user_id/limit/start=:start&end=:end",
   postCtrl.getPostsByUserIdFromLimit,
 );
+router.get("/limit/start=:start&end=:end", postCtrl.getPostsFromLimit);
 
 module.exports = router;

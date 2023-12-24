@@ -87,3 +87,13 @@ exports.getPostsByUserIdFromLimit = (req, res, next) => {
     .then((posts) => res.status(200).json(posts))
     .catch((error) => res.status(400).json({ error }));
 };
+
+// GET POSTS FROM => LIMIT
+exports.getPostsFromLimit = (req, res, next) => {
+  Post.find()
+    .sort({ timestamp: -1 })
+    .skip(req.params.start)
+    .limit(req.params.end)
+    .then((posts) => res.status(200).json(posts))
+    .catch((error) => res.status(400).json(error));
+};

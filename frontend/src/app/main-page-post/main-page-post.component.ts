@@ -35,7 +35,7 @@ export class MainPagePostComponent {
     this.nbLike = this.post.likes.length;
     try {
       this.commentService
-        .getCommentsByPostIdLimit(this.post.id, 1)
+        .getCommentsByPostIdFromLimit(this.post.id, 1, 1)
         .subscribe((comment) => {
           this.firstComment = comment[0];
         });

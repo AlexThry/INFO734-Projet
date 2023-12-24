@@ -70,7 +70,7 @@ export class PostService {
   }
 
   getPostsByUserIdFromLimit(userId: string, start: number, end: number) {
-    const url = `http://localhost:3000/api/post/user/${userId}/start=${start}&end=${end}`;
+    const url = `http://localhost:3000/api/post/user/limit/${userId}/start=${start}&end=${end}`;
     return this.http.get<any>(url).pipe(
       switchMap((posts: any[]) => {
         const userRequests: Observable<User>[] = posts.map((post) =>
@@ -130,8 +130,6 @@ export class PostService {
   unlikePost(postId: number, userConnectedID: string) {
     const url = "http://localhost:3000/api/post/removeLike/" + postId;
 
-    console.log(url);
-
     let data = { userId: userConnectedID };
 
     this.http.put(url, data).subscribe(
@@ -141,6 +139,38 @@ export class PostService {
       (error) => {
         console.error(error);
       },
+    );
+  }
+
+  getPostsFromLimit(start: number, end: number) {
+    const url = `http://localhost:3000/api/post/limit/start=${start}&end=${end}`;
+
+    return this.http.get<any>(url).pipe(
+      switchMap((posts: any[]) => {
+        const userRequests: Observable<User>[] = posts.map((post) =>
+          this.userService.getUserById(post.user_id),
+        );
+
+        return forkJoin(userRequests).pipe(
+          map((users: User[]) => {
+            return posts
+              .filter((post, index) => users[index] !== undefined) // Exclure les posts avec un utilisateur undefined
+              .map(
+                (post, index) =>
+                  new Post(
+                    post._id,
+                    post.user_id,
+                    post.image_url,
+                    post.description,
+                    post.likes,
+                    post.comments,
+                    post.timestamp,
+                    users[index],
+                  ),
+              );
+          }),
+        );
+      }),
     );
   }
 
