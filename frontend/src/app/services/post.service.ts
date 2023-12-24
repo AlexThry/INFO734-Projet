@@ -70,7 +70,7 @@ export class PostService {
   }
 
   getPostsByUserIdFromLimit(userId: string, start: number, end: number) {
-    const url = `http://localhost:3000/api/post/user/limit/${userId}/start=${start}&end=${end}`;
+    const url = `http://localhost:3000/api/post/user/${userId}/limit/start=${start}&end=${end}`;
     return this.http.get<any>(url).pipe(
       switchMap((posts: any[]) => {
         const userRequests: Observable<User>[] = posts.map((post) =>
