@@ -10,6 +10,9 @@ router.delete("/delete/:id", commentCtrl.deleteCommentById);
 
 router.get("/:id", commentCtrl.getCommentById);
 router.get("/postId/:post_id", commentCtrl.getCommentsByPostId);
-router.get("/postId/:post_id/:limit", commentCtrl.getCommentsByPostIdLimit);
+router.get(
+  "/postId/:post_id/start=:start&end=:end",
+  commentCtrl.getCommentsByPostIdFromLimit,
+);
 
 module.exports = router;
