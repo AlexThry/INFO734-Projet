@@ -1,31 +1,30 @@
-import { Component } from '@angular/core';
-import {SidebarComponent} from "../sidebar/sidebar.component";
-import {PostService} from "../services/post.service";
-import {Post} from "../models/post.model";
-import {MainPagePostComponent} from "../main-page-post/main-page-post.component";
-import {TopbarComponent} from "../topbar/topbar.component";
-import {ListPostComponent} from "../list-post/list-post.component";
-import {FullPostComponent} from "../full-post/full-post.component";
-import {RouterOutlet} from "@angular/router";
+import { Component } from "@angular/core";
+import { SidebarComponent } from "../sidebar/sidebar.component";
+import { PostService } from "../services/post.service";
+import { Post } from "../models/post.model";
+import { MainPagePostComponent } from "../main-page-post/main-page-post.component";
+import { TopbarComponent } from "../topbar/topbar.component";
+import { PostListComponent } from "../post-list/post-list.component";
+import { FullPostComponent } from "../full-post/full-post.component";
+import { RouterOutlet } from "@angular/router";
 
 @Component({
-  selector: 'app-main-page-layout',
+  selector: "app-main-page-layout",
   standalone: true,
-    imports: [
-        SidebarComponent,
-        MainPagePostComponent,
-        TopbarComponent,
-        ListPostComponent,
-        FullPostComponent,
-        RouterOutlet
-    ],
-  templateUrl: './main-page-layout.component.html',
-  styleUrl: './main-page-layout.component.css'
+  imports: [
+    SidebarComponent,
+    MainPagePostComponent,
+    TopbarComponent,
+    PostListComponent,
+    FullPostComponent,
+    RouterOutlet,
+  ],
+  templateUrl: "./main-page-layout.component.html",
+  styleUrl: "./main-page-layout.component.css",
 })
 export class MainPageLayoutComponent {
-  posts!: Post[]
-  constructor(private postService: PostService) {
-  }
+  posts!: Post[];
+  constructor(private postService: PostService) {}
 
   ngOnInit() {
     // this.posts = this.postService.getPosts()
