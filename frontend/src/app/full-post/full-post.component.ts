@@ -6,7 +6,7 @@ import { ActivatedRoute, RouterLink } from "@angular/router";
 import { CommentService } from "../services/comment.service";
 import { Comment } from "../models/comment.model";
 import { CommentListComponent } from "../comment-list/comment-list.component";
-import { log } from "console";
+import { Location } from "@angular/common";
 
 @Component({
   selector: "app-full-post",
@@ -26,6 +26,7 @@ export class FullPostComponent {
     protected postService: PostService,
     private commentService: CommentService,
     private route: ActivatedRoute,
+    private location: Location,
   ) {}
 
   ngOnInit() {
@@ -69,5 +70,9 @@ export class FullPostComponent {
       this.postService.actionPostById(this.post.id, userConnectedID, "like");
       this.nbLike += 1;
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
