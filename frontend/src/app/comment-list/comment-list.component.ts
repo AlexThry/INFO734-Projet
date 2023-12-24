@@ -22,18 +22,18 @@ export class CommentListComponent {
   ngOnInit() {
     this.loaded = 10;
     this.commentService
-      .getCommentsByPostIdLimit(this.post.id, this.loaded)
+      .getCommentsByPostIdFromLimit(this.post.id, 0, this.loaded)
       .subscribe((data) => {
         this.commentList = data;
       });
   }
 
   loadMore() {
-    this.loaded += 10;
     this.commentService
-      .getCommentsByPostIdLimit(this.post.id, this.loaded)
+      .getCommentsByPostIdFromLimit(this.post.id, this.loaded, this.loaded + 10)
       .subscribe((data) => {
-        this.commentList = data;
+        this.commentList.push(...data);
+        this.loaded += 10;
       });
   }
 

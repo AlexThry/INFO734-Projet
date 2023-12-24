@@ -40,8 +40,8 @@ export class CommentService {
     );
   }
 
-  getCommentsByPostIdLimit(postId: number, limit: number) {
-    const url = `http://localhost:3000/api/comment/postId/${postId}/${limit}`;
+  getCommentsByPostIdFromLimit(postId: number, start: number, end: number) {
+    const url = `http://localhost:3000/api/comment/postId/${postId}/start=${start}&end=${end}`;
 
     return this.http.get<any[]>(url).pipe(
       switchMap((comments) => {
