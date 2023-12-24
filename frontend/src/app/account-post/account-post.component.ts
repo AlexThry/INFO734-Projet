@@ -18,4 +18,8 @@ export class AccountPostComponent {
   onViewPost() {
     this.router.navigateByUrl(`post/${this.post.id}`);
   }
+
+  postIsLoaded() {
+    return this.post !== undefined;
+  }
 }

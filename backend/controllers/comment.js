@@ -48,6 +48,7 @@ exports.getCommentsByPostIdLimit = (req, res, next) => {
   const n = parseInt(req.params.limit) || 10;
 
   Comment.find({ post_id: req.params.post_id })
+    .sort({ timestamp: -1 })
     .limit(n)
     .then((comment) => res.status(200).json(comment))
     .catch((error) => res.status(404).json({ error }));
