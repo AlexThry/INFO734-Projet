@@ -4,12 +4,11 @@ import {PostService} from "../services/post.service";
 import {Post} from "../models/post.model";
 import {MainPagePostComponent} from "../main-page-post/main-page-post.component";
 import {TopbarComponent} from "../topbar/topbar.component";
-import {ListPostComponent} from "../list-post/list-post.component";
 import {FullPostComponent} from "../full-post/full-post.component";
 import {RouterOutlet} from "@angular/router";
 import { User } from '../models/user.model';
-import { AuthService } from '../services/auth.service';
 import { PostListComponent } from '../post-list/post-list.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: "app-main-page-layout",
