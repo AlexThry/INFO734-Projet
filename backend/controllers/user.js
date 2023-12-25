@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const validator = require('validator');
 
 
 // CREATE
@@ -75,6 +76,11 @@ exports.getAllUser = (req, res, next) => {
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
       .then(hash => {
+
+        if(!validator.isEmail(req.body.email)) {
+            return res.status(400).json({type: "email", message: "E-mail isn't in a valid format"});
+        }
+
         const user = new User({
             username: req.body.username,
             email: req.body.email,
@@ -82,8 +88,12 @@ exports.signup = (req, res, next) => {
             photo_url: req.body.photo_url
         });
         user.save()
-          .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
-          .catch(error => res.status(400).json({ error }));
+          .then((user) => res.status(201).json({ message: 'Utilisateur créé !', user_id: user._id }))
+          .catch(error => {
+
+            let errorToSend = Object.keys(error.keyPattern)[0] === 'username' ? {type: "username", message: `Username ${error.keyValue.username} already exist`} : {type: "email", message: `E-mail ${error.keyValue.email} already exist`};
+            res.status(400).json(errorToSend)
+          });
       })
       .catch(error => res.status(500).json({ error }));
 };

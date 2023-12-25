@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {FormsModule, NgForm} from "@angular/forms";
-import { AuthService } from '../services/auth.service';
 import { take } from 'rxjs';
 import { User } from '../models/user.model';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login-page',

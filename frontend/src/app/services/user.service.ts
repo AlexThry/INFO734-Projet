@@ -34,12 +34,21 @@ export class UserService {
   signup(username: string, email: string, password: string, photo_url: string) {
     const url = `http://localhost:3000/api/user/signup`
 
-    return this.http.post<any>(url, {
-      username,
-      email, 
-      password, 
-      photo_url
-    });
+    return this.http.post<any>(url, {username, email, password, photo_url})
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 400) {
+            // Cas où l'authentification a échoué
+            console.error('Register échouée :', error);
+          } else {
+            // Autres erreurs HTTP
+            console.error('Erreur lors du register :', error);
+          }
+
+          // Propager l'erreur pour permettre à d'autres parties de votre application de la gérer si nécessaire
+          return throwError(error);
+        })
+      )
 
   }
 

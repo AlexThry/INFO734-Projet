@@ -6,8 +6,10 @@ import { SearchPageComponent } from "./search-page/search-page.component";
 import { LoginPageComponent } from "./login-page/login-page.component";
 import { RegisterPageComponent } from "./register-page/register-page.component";
 import { NewPostPageComponent } from "./new-post-page/new-post-page.component";
+import { AuthGuard } from "./guard/auth-gard";
 
 export const routes: Routes = [
+  // { path: "post/:id", component: FullPostComponent, canActivate: [ AuthGuard ] },
   { path: "post/:id", component: FullPostComponent },
   { path: "create", component: NewPostPageComponent },
   { path: "account/:id", component: AccountPageComponent },

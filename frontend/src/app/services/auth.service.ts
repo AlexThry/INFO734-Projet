@@ -13,30 +13,6 @@ export class AuthService {
   constructor(private http: HttpClient,
               protected userService: UserService) { };
 
-  // login(email: string, password: string) {
-    
-  //   return this.userService.login(email, password)
-  //       .subscribe(user => {
-  //           // console.log(user);
-
-  //           let userConnected = new User(
-  //               user._id, 
-  //               user.username, 
-  //               user.email,
-  //               user.password, 
-  //               user.photo_url,
-  //               user.followers,
-  //               user.following,
-  //               user.posts
-  //           )
-  //           localStorage.removeItem("user_id");
-  //           localStorage.setItem("user_id", user._id);
-            
-  //           // Une fois l'authentification réussie, émettez l'événement
-  //           this.userLoggedIn$.next(userConnected);
-  //       })
-
-  // }
 
   login(email: string, password: string): Observable<User> {
     return this.userService.login(email, password)
@@ -52,9 +28,11 @@ export class AuthService {
             user.following,
             user.posts
           );
+
           localStorage.removeItem("user_id");
           localStorage.setItem("user_id", user._id);
           this.userLoggedIn$.next(userConnected);
+
           return userConnected;
         })
       );
@@ -76,7 +54,22 @@ export class AuthService {
     }
   }
 
+  signup(username: string, email: string, password: string, photo_url: string): Observable<any> {
+    return this.userService.signup(username, email, password, photo_url)
+      .pipe(
+        map(data => {
+          localStorage.removeItem("user_id");
+          localStorage.setItem("user_id", data.user_id);
+          return data;  
+        })
+      );
+  }
+
   logout() {
     localStorage.removeItem("user_id");
+  }
+
+  isUserConnected() {
+    return localStorage.getItem("user_id") !== null;
   }
 }
