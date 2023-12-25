@@ -26,12 +26,6 @@ export class PostListComponent implements OnInit {
     this.postService.getPostsFromLimit(0, this.loaded).subscribe((data) => {
       this.posts = data;
     });
-
-    this.userService
-      .getUserById("657b47c90a157aa8e0d66d87")
-      .subscribe((data) => {
-        // console.log(data);
-      });
   }
 
   postsAreLoaded() {
@@ -40,7 +34,7 @@ export class PostListComponent implements OnInit {
 
   loadMore() {
     this.postService
-      .getPostsFromLimit(this.loaded + 1, this.loaded + 10)
+      .getPostsFromLimit(this.loaded + 1, 10)
       .subscribe((posts) => {
         this.posts.push(...posts);
         this.loaded += 10;
