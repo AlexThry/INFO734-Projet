@@ -1,0 +1,18 @@
+@defer (when postsAreLoaded() ) {
+    <div class="flex flex-col items-center mt-28">
+        @for (post of posts; track post){
+            <app-main-page-post class="w-[90%] -sm:w-[100%] max-w-[700px] mb-10" [post]="post" [userConnected]="userConnected"></app-main-page-post>
+        }
+    </div>
+}
+@placeholder {
+    <div class="flex flex-col items-center mt-28">
+        <h1>Chargement des posts</h1>
+        
+    </div>
+    
+  }
+@error {
+    <span>Error</span>
+  }
+

@@ -1,9 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { MainPagePostComponent } from "../main-page-post/main-page-post.component";
 import { Post } from "../models/post.model";
 import { PostService } from "../services/post.service";
 import { NgForOf } from "@angular/common";
 import { UserService } from "../services/user.service";
+import { User } from "../models/user.model";
 
 @Component({
   selector: "app-post-list",
@@ -15,6 +16,7 @@ import { UserService } from "../services/user.service";
 export class PostListComponent implements OnInit {
   posts!: Post[];
   loaded!: number;
+  @Input() userConnected !: User;
 
   constructor(
     private postService: PostService,
@@ -24,14 +26,14 @@ export class PostListComponent implements OnInit {
   ngOnInit() {
     this.loaded = 10;
     this.postService.getPostsFromLimit(0, this.loaded).subscribe((data) => {
-      this.posts = data;
+      this.posts = data;      
     });
 
     this.userService
       .getUserById("657b47c90a157aa8e0d66d87")
       .subscribe((data) => {
         // console.log(data);
-      });
+      });      
   }
 
   postsAreLoaded() {

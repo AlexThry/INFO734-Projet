@@ -10,15 +10,15 @@
         </div>
         <div class="mb-5">
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-            <input name="email" ngModel  type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" placeholder="name@flowbite.com" required>
+            <input name="email" ngModel  type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" placeholder="name@gmail.com" required>
             @if (f.value.email === "" && submit){
                 <p class="text-red-700">Enter an email</p>
             }
         </div>
         <div class="mb-5">
-            <label for="picture" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your picture</label>
-            <input name="picture" ngModel  type="file" id="picture" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" required>
-            @if (f.value.picture === "" && submit){
+            <label for="photo_url" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your picture</label>
+            <input name="photo_url" ngModel  type="file" id="photo_url" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" required>
+            @if (f.value.photo_url === "" && submit){
                 <p class="text-red-700">Load a picture</p>
             }
         </div>

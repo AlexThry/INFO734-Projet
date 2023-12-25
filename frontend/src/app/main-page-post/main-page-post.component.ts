@@ -16,10 +16,11 @@ import { User } from "../models/user.model";
   styleUrl: "./main-page-post.component.css",
 })
 export class MainPagePostComponent {
-  @Input() post!: Post;
-  imageStyle!: string;
-  isLike!: boolean;
-  nbLike!: number;
+  @Input() post!: Post
+  @Input() userConnected !: User;
+  imageStyle!: string
+  isLike!: boolean
+  nbLike!: number
   firstComment!: Comment;
 
   constructor(
@@ -52,14 +53,14 @@ export class MainPagePostComponent {
 
   isLikeByConnectedUser() {
     // TODO - Récupérer l'id de l'user connected
-    const userConnectedID = "657c380b55f994f1b9fd2fdb";
-
+    const userConnectedID = this.userConnected.id.toString();
+    
     return this.post.likes.includes(userConnectedID);
   }
 
   onPostLike() {
     // TODO - Récupérer l'id de l'user connected
-    const userConnectedID = "657c380b55f994f1b9fd2fdb";
+    const userConnectedID = this.userConnected.id.toString();
 
     this.isLike = !this.isLike;
 
