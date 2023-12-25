@@ -78,7 +78,8 @@ exports.signup = (req, res, next) => {
         const user = new User({
             username: req.body.username,
             email: req.body.email,
-            password: hash
+            password: hash, 
+            photo_url: req.body.photo_url
         });
         user.save()
           .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
@@ -92,7 +93,7 @@ exports.login = (req, res, next) => {
     User.findOne({email: req.body.email})
         .then(user => {
             if(!user) {
-                return res.status(401).json({message: "User doesn't exist"});
+                return res.status(401).json({message: "E-mail doesn't exist"});
             }
             
 
@@ -102,14 +103,7 @@ exports.login = (req, res, next) => {
                     return res.status(401).json({message: "Password incorrect"});
                 }
 
-                res.status(200).json({
-                    userId: user._id, 
-                    token: jwt.sign(
-                        {userId: user._id},
-                        'RANDOM_TOKEN_SECRET',
-                        {expiresIn: '24h'}
-                    )
-                });
+                res.status(200).json( user );
             })
             .catch(error => res.status(500).json({ prout: "prout" }));
         })
@@ -117,6 +111,35 @@ exports.login = (req, res, next) => {
 
 };
 
+// exports.login = (req, res, next) => {
+
+//     User.findOne({email: req.body.email})
+//         .then(user => {
+//             if(!user) {
+//                 return res.status(401).json({message: "User doesn't exist"});
+//             }
+            
+
+//             bcrypt.compare(req.body.password, user.password)
+//             .then(valid => {
+//                 if (!valid) {
+//                     return res.status(401).json({message: "Password incorrect"});
+//                 }
+
+//                 res.status(200).json({
+//                     userId: user._id, 
+//                     token: jwt.sign(
+//                         {userId: user._id},
+//                         'RANDOM_TOKEN_SECRET',
+//                         {expiresIn: '24h'}
+//                     )
+//                 });
+//             })
+//             .catch(error => res.status(500).json({ prout: "prout" }));
+//         })
+//         .catch(error => res.status(500).json({ err: "lala" }));
+
+// };
 
 
 // // UPDATE
