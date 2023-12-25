@@ -21,6 +21,7 @@ export class MainPagePostComponent {
   isLike!: boolean;
   nbLike!: number;
   firstComment!: Comment;
+  description!: string;
 
   constructor(
     protected postService: PostService,
@@ -30,6 +31,10 @@ export class MainPagePostComponent {
   ) {}
 
   ngOnInit() {
+    const wordsCount = this.post.description.split(" ").length;
+    const points = wordsCount > 20 ? " ..." : "";
+    this.description =
+      this.post.description.split(" ").slice(0, 20).join(" ") + points;
     this.imageStyle = "url(" + this.post.image_url + ")";
     this.isLike = this.isLikeByConnectedUser();
     this.nbLike = this.post.likes.length;
