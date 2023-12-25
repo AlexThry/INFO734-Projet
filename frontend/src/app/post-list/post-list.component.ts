@@ -40,7 +40,7 @@ export class PostListComponent implements OnInit {
 
   loadMore() {
     this.postService
-      .getPostsFromLimit(this.loaded, this.loaded + 10)
+      .getPostsFromLimit(this.loaded + 1, this.loaded + 10)
       .subscribe((posts) => {
         this.posts.push(...posts);
         this.loaded += 10;
