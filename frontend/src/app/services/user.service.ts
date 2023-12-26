@@ -31,10 +31,10 @@ export class UserService {
       );
   }
 
-  signup(username: string, email: string, password: string, photo_url: string) {
+  signup(formData: any) {
     const url = `http://localhost:3000/api/user/signup`
 
-    return this.http.post<any>(url, {username, email, password, photo_url})
+    return this.http.post<any>(url, formData)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status === 400) {
@@ -45,7 +45,7 @@ export class UserService {
             console.error('Erreur lors du register :', error);
           }
 
-          // Propager l'erreur pour permettre à d'autres parties de votre application de la gérer si nécessaire
+          // Propager l'erreur pour permettre à d'autres parties de l'application de la gérer si nécessaire
           return throwError(error);
         })
       )
@@ -66,7 +66,7 @@ export class UserService {
             console.error('Erreur lors de la connexion :', error);
           }
 
-          // Propager l'erreur pour permettre à d'autres parties de votre application de la gérer si nécessaire
+          // Propager l'erreur pour permettre à d'autres parties de l'application de la gérer si nécessaire
           return throwError(error);
         })
       );
