@@ -81,6 +81,7 @@ exports.getUsersBySearchTerm = (req, res, next) =>{
 
 // ---- CONNEXION
 exports.signup = (req, res, next) => {
+
     bcrypt.hash(req.body.password, 10)
       .then(hash => {
 
@@ -92,8 +93,9 @@ exports.signup = (req, res, next) => {
             username: req.body.username,
             email: req.body.email,
             password: hash, 
-            photo_url: req.body.photo_url
+            photo_url: `${req.protocol}://${req.get('host')}/images/user/${req.file.filename}`
         });
+
         user.save()
           .then((user) => res.status(201).json({ message: 'Utilisateur créé !', user_id: user._id }))
           .catch(error => {

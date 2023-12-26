@@ -54,8 +54,8 @@ export class AuthService {
     }
   }
 
-  signup(username: string, email: string, password: string, photo_url: string): Observable<any> {
-    return this.userService.signup(username, email, password, photo_url)
+  signup(formData: any): Observable<any> {
+    return this.userService.signup(formData)
       .pipe(
         map(data => {
           localStorage.removeItem("user_id");

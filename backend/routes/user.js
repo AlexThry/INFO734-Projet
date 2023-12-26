@@ -1,12 +1,13 @@
 const express = require('express');
 const auth = require('../middleware/auth');
+const multer = require('../middleware/multer-config');
 const userCtrl = require('../controllers/user');
 
 const router = express.Router();
 
 router.post('/searchByTerm', userCtrl.getUsersBySearchTerm)
 router.post('/create', userCtrl.createUser);
-router.post('/signup', userCtrl.signup);
+router.post('/signup', multer, userCtrl.signup);
 router.post('/login', userCtrl.login);
 
 router.put('/update/:id', userCtrl.updateUser);

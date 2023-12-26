@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
-import {FormsModule, NgForm} from "@angular/forms";
+import {FormBuilder, FormGroup, FormsModule, NgForm, Validators} from "@angular/forms";
 import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/user.model';
@@ -20,9 +20,12 @@ export class RegisterPageComponent {
   submit = false;
   userConnected!: User;
   errorRegister !: any | undefined;
+  photoName!: File;
+  registerForm!: FormGroup;
 
 
   constructor(private router: Router,
+    private fb: FormBuilder,
     protected authService: AuthService,
     protected userService: UserService ) {}
 
@@ -31,6 +34,13 @@ export class RegisterPageComponent {
     this.submit = true;
     this.errorRegister = undefined;   
 
+    // Build a formData : Format to send in backend to process with multer in upload file to server
+    const formData = new FormData();
+    formData.append('username', f.value.username);
+    formData.append('email', f.value.email);
+    formData.append('password', f.value.password);
+    formData.append('photo_url', this.photoName, this.photoName.name);
+
 
     if (f.value.username != ""  && 
         f.value.email != "" && 
@@ -38,7 +48,7 @@ export class RegisterPageComponent {
         f.value.photo_url != "" && 
         !this.errorRegisterExist()) {
 
-      this.authService.signup(f.value.username, f.value.email, f.value.password, f.value.photo_url)
+      this.authService.signup(formData)
           .subscribe(
             data => {
               this.authService.getUserLoggedIn$()
@@ -53,7 +63,16 @@ export class RegisterPageComponent {
     }
   }
 
+  onFileChange(event: any) {
+    const fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      this.photoName = fileList[0];
+    }
+  }
+
   errorRegisterExist() {
     return this.errorRegister !== undefined;
   }
+
+
 }
