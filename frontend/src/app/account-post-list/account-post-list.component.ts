@@ -25,11 +25,7 @@ export class AccountPostListComponent {
   ngOnInit() {
     this.loaded = 10;
     this.userId = this.route.snapshot.params["id"];
-    this.postService
-      .getPostsByUserIdFromLimit(this.userId, 0, this.loaded)
-      .subscribe((posts) => {
-        this.posts = posts;
-      });
+    this.loadData();
   }
 
   loadMore() {
@@ -43,5 +39,16 @@ export class AccountPostListComponent {
 
   postsAreLoaded() {
     return this.posts !== undefined;
+  }
+
+  loadData() {
+    this.route.params.subscribe(() => {
+      this.userId = this.route.snapshot.params["id"];
+      this.postService
+        .getPostsByUserIdFromLimit(this.userId, 0, this.loaded)
+        .subscribe((posts) => {
+          this.posts = posts;
+        });
+    });
   }
 }

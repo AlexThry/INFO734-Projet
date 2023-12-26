@@ -26,5 +26,9 @@ export class SidebarComponent implements OnInit {
     this.authService.logout();
   }
 
+  isUserLoaded() {
+    return this.userConnected !== undefined;
+  }
+
   protected readonly routes = routes;
 }

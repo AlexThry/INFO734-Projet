@@ -24,7 +24,7 @@ export class AccountPageComponent {
     private route: ActivatedRoute,
   ) {}
   ngOnInit() {
-    this.route.params.subscribe((params) => {
+    this.route.params.subscribe(() => {
       this.loadData();
     });
   }
