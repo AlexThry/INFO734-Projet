@@ -1,8 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Post} from "../models/post.model";
-import {Account} from "../models/account.model";
 import {PostService} from "../services/post.service";
-import {AccountService} from "../services/account.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {DateAgoPipe} from "../pipes/date-ago.pipe";
 import {UserService} from "../services/user.service";

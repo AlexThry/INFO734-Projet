@@ -75,7 +75,7 @@ export class PostService {
         return this.http.post<any>(url,{"term": term })
             .pipe(
                 switchMap((posts: any[]) => {
-                    const userRequests: Observable<User>[] = posts.map(post => this.userService.getByIdUser(post.user_id));
+                    const userRequests: Observable<User>[] = posts.map(post => this.userService.getUserById(post.user_id));
 
                     return forkJoin(userRequests).pipe(
                         map((users: User[]) => {
