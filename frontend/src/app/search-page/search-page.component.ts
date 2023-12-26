@@ -5,6 +5,8 @@ import {PostService} from "../services/post.service";
 import {AccountService} from "../services/account.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {DateAgoPipe} from "../pipes/date-ago.pipe";
+import {UserService} from "../services/user.service";
+import {User} from "../models/user.model";
 
 @Component({
   selector: 'app-search-page',
@@ -18,17 +20,32 @@ import {DateAgoPipe} from "../pipes/date-ago.pipe";
 })
 export class SearchPageComponent {
   @Input() posts!: Post[]
-  @Input() accounts!: Account[]
+  @Input() users!: User[]
   @Input() searchContent!: string
+  // searchContent = this.route.snapshot.params['content'];
+
 
   constructor(protected postService: PostService,
-              protected accountService: AccountService,
+              protected userService: UserService,
               private route: ActivatedRoute) {}
 
   ngOnInit() {
-    // this.searchContent = this.route.snapshot.params['content'];
-    // this.accounts = this.accountService.getAccountsBySearch(this.searchContent);
+    this.posts = []
+    this.users = []
+    this.searchContent = this.route.snapshot.params['content'];
+    console.log(this.searchContent)
+
+    this.userService.getUsersByTerm(this.searchContent)
+        .subscribe(data => {
+          this.users = data;
+        })
+    console.log(this.users)
     // this.posts = this.postService.getPostsBySearch(this.searchContent);
+    this.postService.getPostsBySearchTerm(this.searchContent)
+        .subscribe(data => {
+          this.posts = data;
+        })
+    console.log(this.posts)
   }
 
 }
