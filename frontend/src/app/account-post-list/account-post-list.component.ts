@@ -33,14 +33,12 @@ export class AccountPostListComponent {
   }
 
   loadMore() {
-    console.log(
-      this.postService
-        .getPostsByUserIdFromLimit(this.userId, this.loaded, 10)
-        .subscribe((posts) => {
-          this.posts.push(...posts);
-          this.loaded += 10;
-        }),
-    );
+    this.postService
+      .getPostsByUserIdFromLimit(this.userId, this.loaded, 10)
+      .subscribe((posts) => {
+        this.posts.push(...posts);
+        this.loaded += 10;
+      });
   }
 
   postsAreLoaded() {

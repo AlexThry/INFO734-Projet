@@ -12,10 +12,17 @@
                 </div>
             </div>
         </div>
-        <div id="bottom-sm" class="flex content-center justify-items-center items-center justify-center">
-            <button type="button" class="w-40 text-white bg-pink-500 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 hover:shadow-pink-500/25  dark:shadow-lg transition duration-150 dark:shadow-pink-800/80 font-medium rounded-lg text-md px-5 py-2.5 text-center me-2 mb-2 mt-2">Edit Profile</button>
-            <button type="button" class="w-40 text-white bg-pink-500 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 hover:shadow-pink-500/25  dark:shadow-lg transition duration-150 dark:shadow-pink-800/80 font-medium rounded-lg text-md px-5 py-2.5 text-center me-2 mb-2 mt-2">Share</button>
-        </div>
+        @if (this.user.id === userConnected.id) {
+            <div id="bottom-sm" class="flex content-center justify-items-center items-center justify-center">
+                <button type="button" class="w-40 text-white bg-pink-500 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 hover:shadow-pink-500/25  dark:shadow-lg transition duration-150 dark:shadow-pink-800/80 font-medium rounded-lg text-md px-5 py-2.5 text-center me-2 mb-2 mt-2">Edit Profile</button>
+                <button type="button" class="w-40 text-white bg-pink-500 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 hover:shadow-pink-500/25  dark:shadow-lg transition duration-150 dark:shadow-pink-800/80 font-medium rounded-lg text-md px-5 py-2.5 text-center me-2 mb-2 mt-2">Share</button>
+
+            </div>
+        } @else {
+            <div id="bottom-sm" class="flex content-center justify-items-center items-center justify-center">
+                <button type="button" class="w-40 text-white bg-pink-500 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 hover:shadow-pink-500/25  dark:shadow-lg transition duration-150 dark:shadow-pink-800/80 font-medium rounded-lg text-md px-5 py-2.5 text-center me-2 mb-2 mt-2">Share</button>
+            </div>
+        }
         <hr class="mb-6 mt-4 border-1">
         <app-account-post-list></app-account-post-list>
 

@@ -16,6 +16,7 @@ import { AccountPostListComponent } from "../account-post-list/account-post-list
 export class AccountPageComponent {
   user!: User;
   posts!: Post[];
+  @Input() userConnected!: User;
 
   constructor(
     protected postService: PostService,
@@ -23,13 +24,19 @@ export class AccountPageComponent {
     private route: ActivatedRoute,
   ) {}
   ngOnInit() {
-    const userId = this.route.snapshot.params["id"];
-    this.userService.getUserById(userId).subscribe((user) => {
-      this.user = user;
+    this.route.params.subscribe((params) => {
+      this.loadData();
     });
   }
 
   userIsLoaded() {
     return this.user !== undefined;
+  }
+
+  loadData() {
+    const userId = this.route.snapshot.params["id"];
+    this.userService.getUserById(userId).subscribe((user) => {
+      this.user = user;
+    });
   }
 }
