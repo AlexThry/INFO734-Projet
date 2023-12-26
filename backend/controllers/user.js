@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const validator = require('validator');
 
 
 // CREATE
@@ -57,7 +58,7 @@ exports.deleteUser = (req, res, next) => {
 }
 
 // GET BY ID
-exports.getByIdUser = (req, res, next) => {
+exports.getUserById = (req, res, next) => {
     User.findOne({ _id: req.params.id })
     .then(user => res.status(200).json(user))
     .catch(error => res.status(404).json({ error }));
@@ -82,14 +83,24 @@ exports.getUsersBySearchTerm = (req, res, next) =>{
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
       .then(hash => {
+
+        if(!validator.isEmail(req.body.email)) {
+            return res.status(400).json({type: "email", message: "E-mail isn't in a valid format"});
+        }
+
         const user = new User({
             username: req.body.username,
             email: req.body.email,
-            password: hash
+            password: hash, 
+            photo_url: req.body.photo_url
         });
         user.save()
-          .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
-          .catch(error => res.status(400).json({ error }));
+          .then((user) => res.status(201).json({ message: 'Utilisateur créé !', user_id: user._id }))
+          .catch(error => {
+
+            let errorToSend = Object.keys(error.keyPattern)[0] === 'username' ? {type: "username", message: `Username ${error.keyValue.username} already exist`} : {type: "email", message: `E-mail ${error.keyValue.email} already exist`};
+            res.status(400).json(errorToSend)
+          });
       })
       .catch(error => res.status(500).json({ error }));
 };
@@ -99,7 +110,7 @@ exports.login = (req, res, next) => {
     User.findOne({email: req.body.email})
         .then(user => {
             if(!user) {
-                return res.status(401).json({message: "User doesn't exist"});
+                return res.status(401).json({message: "E-mail doesn't exist"});
             }
             
 
@@ -109,14 +120,7 @@ exports.login = (req, res, next) => {
                     return res.status(401).json({message: "Password incorrect"});
                 }
 
-                res.status(200).json({
-                    userId: user._id, 
-                    token: jwt.sign(
-                        {userId: user._id},
-                        'RANDOM_TOKEN_SECRET',
-                        {expiresIn: '24h'}
-                    )
-                });
+                res.status(200).json( user );
             })
             .catch(error => res.status(500).json({ prout: "prout" }));
         })
@@ -124,6 +128,35 @@ exports.login = (req, res, next) => {
 
 };
 
+// exports.login = (req, res, next) => {
+
+//     User.findOne({email: req.body.email})
+//         .then(user => {
+//             if(!user) {
+//                 return res.status(401).json({message: "User doesn't exist"});
+//             }
+            
+
+//             bcrypt.compare(req.body.password, user.password)
+//             .then(valid => {
+//                 if (!valid) {
+//                     return res.status(401).json({message: "Password incorrect"});
+//                 }
+
+//                 res.status(200).json({
+//                     userId: user._id, 
+//                     token: jwt.sign(
+//                         {userId: user._id},
+//                         'RANDOM_TOKEN_SECRET',
+//                         {expiresIn: '24h'}
+//                     )
+//                 });
+//             })
+//             .catch(error => res.status(500).json({ prout: "prout" }));
+//         })
+//         .catch(error => res.status(500).json({ err: "lala" }));
+
+// };
 
 
 // // UPDATE

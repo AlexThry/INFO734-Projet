@@ -1,11 +1,25 @@
-<div class="flex w-full h-full">
-    <div class="w-fit">
-        <app-sidebar></app-sidebar>
+@defer (when userConnectedIsLoaded()){
+    <div class="flex w-full h-full">
+        <div class="w-fit">
+            <!-- <app-sidebar></app-sidebar> -->
+            <app-sidebar [userConnected]="userConnected"></app-sidebar>
+        </div>
+        <div class="h-screen md:w-[calc(100%-16rem)] md:ml-[16rem] -md:w-full">
+            <app-topbar></app-topbar>
+
+            <router-outlet (activate)="onOutletLoaded($event)"></router-outlet>
+        </div>
     </div>
-    <div class="h-screen md:w-[calc(100%-16rem)] md:ml-[16rem] -md:w-full">
-        <app-topbar></app-topbar>
-<!--        <app-list-post></app-list-post>-->
-<!--        <app-full-post></app-full-post>-->
-        <router-outlet></router-outlet>
+}
+@placeholder {
+    <div class="flex flex-col items-center mt-28">
+        <h1>Chargement de la page principal</h1>
+        
     </div>
-</div>
+}
+@error {
+    <span>Error</span>
+  }
+
+
+

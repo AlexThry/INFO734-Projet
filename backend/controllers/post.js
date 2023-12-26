@@ -59,13 +59,35 @@ exports.getFromUserIdPost = (req, res, next) => {
 
 // GET ALL
 exports.getAllPost = (req, res, next) => {
-    Post.find()
-    .then(post => res.status(200).json(post))
-    .catch(error => res.status(400).json({ error }));
-}
+  Post.find()
+    .sort({ timestamp: -1 })
+    .then((posts) => res.status(200).json(posts))
+    .catch((error) => res.status(400).json({ error }));
+};
 
 exports.getPostsBySearchTerm = (req, res, next) =>{
     Post.find({description: { $regex: new RegExp(req.body.term) }})
         .then(post => res.status(200).json(post))
         .catch(error => res.status(400).json({ error }));
 }
+
+// GET POSTS BY USER ID FROM => TO
+exports.getPostsByUserIdFromLimit = (req, res, next) => {
+  Post.find({ user_id: req.params.user_id })
+    .sort({ timestamp: -1 })
+    .skip(req.params.start)
+    .limit(req.params.end)
+    .then((posts) => res.status(200).json(posts))
+    .catch((error) => res.status(400).json({ error }));
+};
+
+// GET POSTS FROM => LIMIT
+exports.getPostsFromLimit = (req, res, next) => {
+  Post.find()
+    .sort({ timestamp: -1 })
+    .skip(req.params.start)
+    .limit(req.params.end)
+    .then((posts) => res.status(200).json(posts))
+    .catch((error) => res.status(400).json(error));
+};
+

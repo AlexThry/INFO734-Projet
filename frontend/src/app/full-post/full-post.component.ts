@@ -1,52 +1,59 @@
-import {Component, Input} from '@angular/core';
-import {DateAgoPipe} from "../pipes/date-ago.pipe";
-import {Post} from "../models/post.model";
-import {PostService} from "../services/post.service";
-import {ActivatedRoute, RouterLink} from "@angular/router";
+import { Component, Input } from "@angular/core";
+import { DateAgoPipe } from "../pipes/date-ago.pipe";
+import { Post } from "../models/post.model";
+import { PostService } from "../services/post.service";
+import { ActivatedRoute, RouterLink } from "@angular/router";
+import { CommentService } from "../services/comment.service";
+import { Comment } from "../models/comment.model";
+import { CommentListComponent } from "../comment-list/comment-list.component";
+import { Location } from "@angular/common";
 
 @Component({
-  selector: 'app-full-post',
+  selector: "app-full-post",
   standalone: true,
-    imports: [
-        DateAgoPipe,
-        RouterLink
-    ],
-  templateUrl: './full-post.component.html',
-  styleUrl: './full-post.component.css'
+  imports: [DateAgoPipe, RouterLink, CommentListComponent],
+  templateUrl: "./full-post.component.html",
+  styleUrl: "./full-post.component.css",
 })
 export class FullPostComponent {
-  @Input() post!: Post
-  imageStyle!: string
-  isLike!: boolean
-  nbLike!: number
+  @Input() post!: Post;
+  imageStyle!: string;
+  isLike!: boolean;
+  nbLike!: number;
+  comments!: Comment[];
 
-  constructor(protected postService: PostService, private route: ActivatedRoute) {}
+  constructor(
+    protected postService: PostService,
+    private commentService: CommentService,
+    private route: ActivatedRoute,
+    private location: Location,
+  ) {}
 
   ngOnInit() {
-    const postId = this.route.snapshot.params['id'];
+    const postId = this.route.snapshot.params["id"];
 
-    this.postService.getPostById(postId)
-      .subscribe(data => {
-        this.post = data;
-        this.imageStyle = "url(" + this.post.image_url + ")";
+    this.postService.getPostById(postId).subscribe((data) => {
+      this.post = data;
+      this.imageStyle = "url(" + this.post.image_url + ")";
 
-        this.isLike = this.isLikeByConnectedUser();
-        this.nbLike = this.post.likes.length
-      });
-
-    
-
-    
+      this.isLike = this.isLikeByConnectedUser();
+      this.nbLike = this.post.likes.length;
+      this.commentService
+        .getAllCommentsByPostId(this.post.id)
+        .subscribe((data) => {
+          this.post.setListComment(data);
+        });
+    });
   }
 
   postIsLoaded() {
-    return this.post !== undefined
+    return this.post !== undefined;
   }
 
   isLikeByConnectedUser() {
     // TODO - Récupérer l'id de l'user connected
     const userConnectedID = "657c380b55f994f1b9fd2fdb";
-    
+
     return this.post.likes.includes(userConnectedID);
   }
 
@@ -57,12 +64,15 @@ export class FullPostComponent {
     this.isLike = !this.isLike;
 
     if (!this.isLike) {
-      this.postService.actionPostById(this.post.id, userConnectedID, 'unlike');
+      this.postService.actionPostById(this.post.id, userConnectedID, "unlike");
       this.nbLike -= 1;
-    }
-    else {
-      this.postService.actionPostById(this.post.id, userConnectedID, 'like');
+    } else {
+      this.postService.actionPostById(this.post.id, userConnectedID, "like");
       this.nbLike += 1;
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
