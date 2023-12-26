@@ -70,6 +70,13 @@ exports.getAllUser = (req, res, next) => {
     .catch(error => res.status(400).json({ error }));
 }
 
+//GET BY SEARCH TERM
+exports.getUsersBySearchTerm = (req, res, next) =>{
+    User.find({username: { $regex: new RegExp(req.body.term) }})
+        .then(user => res.status(200).json(user))
+        .catch(error => res.status(400).json({ error }));
+}
+
 
 // ---- CONNEXION
 exports.signup = (req, res, next) => {

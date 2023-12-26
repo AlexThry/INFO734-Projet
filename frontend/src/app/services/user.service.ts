@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import {forkJoin, map, Observable, switchMap} from 'rxjs';
 import { User } from '../models/user.model';
+import {Post} from "../models/post.model";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class UserService {
         return this.http.get<any>(url)
           .pipe(
             map((data: any) => new User(
-                data._id, 
+                data.id,
                 data.username, 
                 data.email, 
                 data.password,
@@ -26,5 +27,25 @@ export class UserService {
                 data.posts
                 ))
           );
+  }
+
+  getUsersByTerm(term:string){
+      let url = `http://localhost:3000/api/user/searchByTerm`
+      return this.http.post<any[]>(url, {"term": term })
+          .pipe(
+          map(usersData => {
+              return usersData.map(userData => {
+                  return new User(
+                      userData.id,
+                      userData.username,
+                      userData.email,
+                      userData.password,
+                      userData.photo_url,
+                      userData.followers,
+                      userData.following,
+                      userData.posts
+                  );
+              })
+          }))
   }
 }
