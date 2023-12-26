@@ -1,31 +1,30 @@
-import { Component, Input, OnInit } from '@angular/core';
-import {RouterLink} from "@angular/router";
-import { User } from '../models/user.model';
-import { AuthService } from '../services/auth.service';
-
-
+import { Component, Input, OnInit } from "@angular/core";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import { User } from "../models/user.model";
+import { AuthService } from "../services/auth.service";
+import { routes } from "../app.routes";
 
 @Component({
-  selector: 'app-sidebar',
+  selector: "app-sidebar",
   standalone: true,
-    imports: [
-        RouterLink
-    ],
-  templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.css'
+  imports: [RouterLink],
+  templateUrl: "./sidebar.component.html",
+  styleUrl: "./sidebar.component.css",
 })
 export class SidebarComponent implements OnInit {
+  @Input() userConnected!: User;
 
-  @Input() userConnected !: User;
+  constructor(
+    protected authService: AuthService,
+    protected router: Router,
+    protected route: ActivatedRoute,
+  ) {}
 
-  constructor(protected authService: AuthService) {}
-
-  ngOnInit() {
-      // console.log(this.userConnected);
-      
-  }
+  ngOnInit() {}
 
   onLogOut() {
     this.authService.logout();
   }
+
+  protected readonly routes = routes;
 }
