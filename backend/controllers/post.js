@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const User = require("../models/user");
 
 // CREATE
 exports.createPost = (req, res, next) => {
@@ -61,4 +62,10 @@ exports.getAllPost = (req, res, next) => {
     Post.find()
     .then(post => res.status(200).json(post))
     .catch(error => res.status(400).json({ error }));
+}
+
+exports.getPostsBySearchTerm = (req, res, next) =>{
+    Post.find({description: { $regex: new RegExp(req.body.term) }})
+        .then(post => res.status(200).json(post))
+        .catch(error => res.status(400).json({ error }));
 }

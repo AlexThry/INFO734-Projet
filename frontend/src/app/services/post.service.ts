@@ -135,6 +135,34 @@ export class PostService {
           );
       }
 
+    getPostsBySearchTerm(term:string): Observable<Post[]> {
+        const url = 'http://localhost:3000/api/post/searchByTerm';
+
+        return this.http.post<any>(url,{"term": term })
+            .pipe(
+            switchMap((posts: any[]) => {
+                const userRequests: Observable<User>[] = posts.map(post => this.userService.getByIdUser(post.user_id));
+
+                return forkJoin(userRequests).pipe(
+                    map((users: User[]) => {
+                        return posts
+                            .filter((post, index) => users[index] !== undefined) // Exclure les posts avec un utilisateur undefined
+                            .map((post, index) => new Post(
+                                post.id,
+                                post.user_id,
+                                post.image_url,
+                                post.description,
+                                post.likes,
+                                post.comments,
+                                post.timestamp,
+                                users[index]
+                            ));
+                    })
+                );
+            })
+        );
+    }
+
     actionPostById(postId: number, userConnectedID: string, action: 'like' | 'unlike') {
         
 
