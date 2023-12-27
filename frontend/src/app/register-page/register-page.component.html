@@ -7,7 +7,7 @@
             @if (f.value.username === "" && submit){
                 <p class="text-red-700">Enter an username</p>
             }
-            @if(errorRegisterExist() && errorRegister.type === 'username') {
+            @if(errorRegisterExist() && errorIsUsername()) {
                 <p class="text-red-700">{{ errorRegister.message }}</p>
             }
         </div>
@@ -17,7 +17,7 @@
             @if (f.value.email === "" && submit){
                 <p class="text-red-700">Enter an email</p>
             }
-            @if(errorRegisterExist() && errorRegister.type === 'email') {
+            @if(errorRegisterExist() && errorIsEmail()) {
                 <p class="text-red-700">{{ errorRegister.message }}</p>
             }
         </div>

@@ -74,5 +74,14 @@ export class RegisterPageComponent {
     return this.errorRegister !== undefined;
   }
 
+  errorIsUsername() {
+    return this.errorRegister.type === 'username';
+  }
+
+  errorIsEmail() {
+    return this.errorRegister.type === 'email';
+  }
+
+
 
 }

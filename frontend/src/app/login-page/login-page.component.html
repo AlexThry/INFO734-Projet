@@ -13,6 +13,9 @@
                 @if (f.value.email === "" && submit){
                     <p class="text-red-700">Enter an email</p>
                 }
+                @if (errorLoginExist() && errorIsEmail()) {
+                    <p class="text-red-700">{{ errorLogin.message }}</p>
+                }
             </div>
             <div class="mb-5">
                 <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
@@ -20,14 +23,10 @@
                 @if (f.value.password === "" && submit){
                     <p class="text-red-700">Enter a password</p>
                 }
+                @if (errorLoginExist() && errorIsPassword()) {
+                    <p class="text-red-700">{{ errorLogin.message }}</p>
+                }
             </div>
-
-            @if (errorLoginExist()) {
-                <div class="mb-5 error_login_container">
-                <p class="error_login_txt error_form">{{ errorLogin }}</p>
-                </div>
-            }
-
 
             <button type="submit" class="text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800">Login</button>
             <p class="mt-2">Haven't an account ? <a routerLink="/register" class="text-pink-700">Register</a></p>

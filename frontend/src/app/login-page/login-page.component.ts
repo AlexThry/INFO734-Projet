@@ -19,7 +19,7 @@ export class LoginPageComponent{
   submit = false;
   isLoading !: boolean;
   userConnected!: User;
-  errorLogin !: string | undefined;
+  errorLogin !: any | undefined;
 
 
   constructor(private router: Router,
@@ -46,7 +46,7 @@ export class LoginPageComponent{
         },
         error => {
           console.error('Erreur lors de la connexion :', error.error.message);
-          this.errorLogin = error.error.message;
+          this.errorLogin = error.error;
         })
       
     }
@@ -59,6 +59,14 @@ export class LoginPageComponent{
 
   errorLoginExist() {
     return this.errorLogin !== undefined;
+  }
+
+  errorIsEmail() {
+    return this.errorLogin.type === 'email';
+  }
+
+  errorIsPassword() {
+    return this.errorLogin.type === 'password';
   }
 
 }
