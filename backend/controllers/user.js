@@ -19,15 +19,26 @@ exports.createUser = (req, res, next) => {
     .catch(error => res.status(400).json({ error }));
 }
 
-// UPDTAE 
-exports.updateUser = (req, res, next) => {
-//   User.updateOne({ _id: req.params.id }, { $addToSet: {followers: req.body.newFollowerId}, _id: req.params.id })
-//     .then(() => res.status(200).json({ message: 'User modifié !'}))
-//     .catch(error => res.status(400).json({ error }));
-}
+// UPDATE
+exports.updateUser = (req, res) => {
+    console.log(req)
+    User.updateOne(
+        { _id: req.params.id },
+        {
+            $set: {
+                ...req.body
+            },
+        }
+    )
+        .then(() => {
+            res.status(200).json({message: "Utilisateur modifié !"})
+            console.log({...req.body})
+        })
+        .catch(error => res.status(400).json({ error }))
+};
 
 // NEW FOLLOWING
-exports.newFollowingUser = (req, res, next) => {
+exports.newFollowingUser = (req, res) => {
     const userCurrentId = req.body.userCurrentId;
     const userToFollowId = req.body.userToFollowId;
 
