@@ -1,12 +1,14 @@
 const express = require("express");
 // const auth = require('../middleware/auth');
 const postCtrl = require('../controllers/post');
+const multer = require('../middleware/multer-config-post');
+
 const userCtrl = require("../controllers/user");
 
 const router = express.Router();
 
 router.post('/searchByTerm', postCtrl.getPostsBySearchTerm)
-router.post('/create', postCtrl.createPost);
+router.post('/create', multer, postCtrl.createPost);
 
 router.put("/update/:id", postCtrl.updatePost);
 router.put("/addLike/:id", postCtrl.likePost);

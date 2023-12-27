@@ -69,64 +69,64 @@ export class PostService {
     );
   }
 
-    getPostsBySearchTerm(term:string): Observable<Post[]> {
-        const url = 'http://localhost:3000/api/post/searchByTerm';
+  getPostsBySearchTerm(term:string): Observable<Post[]> {
+      const url = 'http://localhost:3000/api/post/searchByTerm';
 
-        return this.http.post<any>(url,{"term": term })
-            .pipe(
-                switchMap((posts: any[]) => {
-                    const userRequests: Observable<User>[] = posts.map(post => this.userService.getUserById(post.user_id));
+      return this.http.post<any>(url,{"term": term })
+          .pipe(
+              switchMap((posts: any[]) => {
+                  const userRequests: Observable<User>[] = posts.map(post => this.userService.getUserById(post.user_id));
 
-                    return forkJoin(userRequests).pipe(
-                        map((users: User[]) => {
-                            return posts
-                                .filter((post, index) => users[index] !== undefined) // Exclure les posts avec un utilisateur undefined
-                                .map((post, index) => new Post(
-                                    post.id,
-                                    post.user_id,
-                                    post.image_url,
-                                    post.description,
-                                    post.likes,
-                                    post.comments,
-                                    post.timestamp,
-                                    users[index]
-                                ));
-                        })
-                    );
-                })
-            );
-    }
+                  return forkJoin(userRequests).pipe(
+                      map((users: User[]) => {
+                          return posts
+                              .filter((post, index) => users[index] !== undefined) // Exclure les posts avec un utilisateur undefined
+                              .map((post, index) => new Post(
+                                  post.id,
+                                  post.user_id,
+                                  post.image_url,
+                                  post.description,
+                                  post.likes,
+                                  post.comments,
+                                  post.timestamp,
+                                  users[index]
+                              ));
+                      })
+                  );
+              })
+          );
+  }
 
-    getPostsByUserIdFromLimit(userId: string, start: number, end: number) {
-        const url = `http://localhost:3000/api/post/user/${userId}/limit/start=${start}&end=${end}`;
-        return this.http.get<any>(url).pipe(
-            switchMap((posts: any[]) => {
-                const userRequests: Observable<User>[] = posts.map((post) =>
-                    this.userService.getUserById(post.user_id),
-                );
+  getPostsByUserIdFromLimit(userId: string, start: number, end: number) {
+      const url = `http://localhost:3000/api/post/user/${userId}/limit/start=${start}&end=${end}`;
+      return this.http.get<any>(url).pipe(
+          switchMap((posts: any[]) => {
+              const userRequests: Observable<User>[] = posts.map((post) =>
+                  this.userService.getUserById(post.user_id),
+              );
 
-                return forkJoin(userRequests).pipe(
-                    map((users: User[]) => {
-                        return posts
-                            .filter((post, index) => users[index] !== undefined)
-                            .map(
-                                (post, index) =>
-                                    new Post(
-                                        post._id,
-                                        post.user_id,
-                                        post.image_url,
-                                        post.description,
-                                        post.likes,
-                                        post.comments,
-                                        post.timestamp,
-                                        users[index],
-                                    ),
-                            );
-                    }),
-                );
-            }),
-        );
-    }
+              return forkJoin(userRequests).pipe(
+                  map((users: User[]) => {
+                      return posts
+                          .filter((post, index) => users[index] !== undefined)
+                          .map(
+                              (post, index) =>
+                                  new Post(
+                                      post._id,
+                                      post.user_id,
+                                      post.image_url,
+                                      post.description,
+                                      post.likes,
+                                      post.comments,
+                                      post.timestamp,
+                                      users[index],
+                                  ),
+                          );
+                  }),
+              );
+          }),
+      );
+  }
 
 
   actionPostById(
@@ -201,6 +201,12 @@ export class PostService {
         );
       }),
     );
+  }
+
+  createPost(formData: FormData) {
+    const url = `http://localhost:3000/api/post/create`;
+
+    return this.http.post(url, formData);
   }
 
   // getPostsBySearch(content:string):Post[]{

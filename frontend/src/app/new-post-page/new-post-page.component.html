@@ -9,18 +9,15 @@
     <p class="text-5xl text-pink-700 my-6">NEW POST</p>
     <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="max-w-sm mx-auto w-full">
         <div class="mb-5">
-            <label for="picture" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your picture</label>
-            <input name="picture" ngModel  type="file" id="picture" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" required>
-            @if (f.value.picture === "" && submit){
-                <p class="text-red-700">Load a picture</p>
+            <label for="image_url" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your picture</label>
+            <input name="image_url" ngModel  type="file" (change)="onFileChange($event)" id="image_url" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" required>
+            @if (f.value.image_url === "" && submit){
+                <p class="text-red-700">Load an image</p>
             }
         </div>
         <div class="mb-5">
             <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your description</label>
             <textarea name="description" ngModel  type="text" id="description" rows="4"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" placeholder="Write your description..." required></textarea>
-            @if (f.value.description === "" && submit){
-                <p class="text-red-700">Write a description</p>
-            }
         </div>
         <button type="submit" class="text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800">Create New Post</button>
     </form>
