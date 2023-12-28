@@ -1,9 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {forkJoin, Observable, switchMap} from 'rxjs';
+import {forkJoin, ObjectUnsubscribedError, Observable, switchMap} from 'rxjs';
 import { catchError, map, throwError } from 'rxjs';
 import { User } from '../models/user.model';
 import {Post} from "../models/post.model";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Injectable({
   providedIn: "root",
@@ -74,8 +75,8 @@ export class UserService {
 
   }
 
-  getUsersByTerm(term:string){
-      let url = `http://localhost:3000/api/user/searchByTerm`
+  getUsersByTerm(term: string){
+      let url = "http://localhost:3000/api/user/searchByTerm"
       return this.http.post<any[]>(url, {"term": term })
           .pipe(
           map(usersData => {
@@ -92,5 +93,11 @@ export class UserService {
                   );
               })
           }))
+  }
+
+  modifyUser(id: string, parameters: Object) {
+
+      const url = `http://localhost:3000/api/user/update/${id}`
+      this.http.put(url, parameters)
   }
 }
