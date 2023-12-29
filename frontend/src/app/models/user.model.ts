@@ -27,4 +27,5 @@ export class User {
     this.following = following;
     this.posts = posts;
   }
+
 }

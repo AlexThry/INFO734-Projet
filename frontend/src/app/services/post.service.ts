@@ -82,7 +82,7 @@ export class PostService {
                             return posts
                                 .filter((post, index) => users[index] !== undefined) // Exclure les posts avec un utilisateur undefined
                                 .map((post, index) => new Post(
-                                    post.id,
+                                    post._id,
                                     post.user_id,
                                     post.image_url,
                                     post.description,

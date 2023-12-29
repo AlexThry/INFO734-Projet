@@ -46,4 +46,5 @@ export class SearchPageComponent {
     console.log(this.posts)
   }
 
+
 }
