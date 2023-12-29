@@ -11,10 +11,11 @@
         } @else {
             <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
             @for (user of this.users; track user){
-                <a routerLink="/account/{{this.user.id}}" class="h-full cursor-pointer flex flex-col items-center">
+<!--                <p>{{this.getUserId(user:User)}}</p>-->
+                <a routerLink="/account/{{user.id}}" class="h-full cursor-pointer flex flex-col items-center">
                     <img class="w-34 h-34 -md:w-24 -md:h-24 p-0.5 mt-2 rounded-full ring-2 ring-pink-500 dark:ring-pink-700"
-                         src="{{ this.user.photo_url }}" alt="Bordered avatar">
-                    <p class="mt-2 text-xl text-center">{{this.user.username}}</p>
+                         src="{{ user.photo_url }}" alt="Bordered avatar">
+                    <p class="mt-2 text-xl text-center">{{user.username}}</p>
                 </a>
 
             }
@@ -35,11 +36,11 @@
                             <img class="w-10 h-10 mr-2 p-0.5 rounded-full ring-2 ring-pink-500 dark:ring-pink-700 -sm:w-8 -sm:h-8"
                                  src="{{ this.post.user.photo_url }}" alt="Bordered avatar">
                             <div>
-                                <p class="font-bold text-m -sm:text-xs">{{ this.post.user.username }}</p>
+                                <a routerLink="/account/{{post.user_id}}"><p class="font-bold text-m -sm:text-xs">{{ this.post.user.username }}</p></a>
                                 <p class="text-xs -sm:text-xxs">{{ this.post.timestamp | dateAgo }}</p>
                             </div>
                         </a>
-                        <a routerLink="/posts/{{this.post.id}}" class="cursor-pointer">
+                        <a routerLink="/post/{{this.post.id}}" class="cursor-pointer">
                             <img class="object-cover h-56 w-full max-w-full rounded-lg cursor-pointer" src="{{ post.image_url }}" alt="{{post.user.username}}">
                         </a>
                     </div>
@@ -48,17 +49,3 @@
         }
     </div>
 </div>
-
-
-<h2>SEARCH PAGE COMPONENT</h2>
-<h2>SEARCH PAGE COMPONENT</h2>
-<h2>SEARCH PAGE COMPONENT</h2>
-<h2>SEARCH PAGE COMPONENT</h2>
-<h2>SEARCH PAGE COMPONENT</h2>
-<h2>SEARCH PAGE COMPONENT</h2>
-<h2>SEARCH PAGE COMPONENT</h2>
-<h2>SEARCH PAGE COMPONENT</h2>
-<h2>SEARCH PAGE COMPONENT</h2>
-<h2>SEARCH PAGE COMPONENT</h2>
-<h2>SEARCH PAGE COMPONENT</h2>
-<h2>SEARCH PAGE COMPONENT</h2>

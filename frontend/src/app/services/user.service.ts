@@ -81,7 +81,7 @@ export class UserService {
           map(usersData => {
               return usersData.map(userData => {
                   return new User(
-                      userData.id,
+                      userData._id,
                       userData.username,
                       userData.email,
                       userData.password,
@@ -93,4 +93,5 @@ export class UserService {
               })
           }))
   }
+
 }
