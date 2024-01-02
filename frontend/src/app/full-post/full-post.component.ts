@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import {Component, Input, Output} from "@angular/core";
 import { DateAgoPipe } from "../pipes/date-ago.pipe";
 import { Post } from "../models/post.model";
 import { PostService } from "../services/post.service";
@@ -21,6 +21,7 @@ export class FullPostComponent {
   isLike!: boolean;
   nbLike!: number;
   comments!: Comment[];
+  write:boolean = false;
 
   constructor(
     protected postService: PostService,
@@ -70,6 +71,14 @@ export class FullPostComponent {
       this.postService.actionPostById(this.post.id, userConnectedID, "like");
       this.nbLike += 1;
     }
+  }
+
+  addComment(){
+    this.write = true;
+  }
+
+  cancelComment() {
+    this.write = false;
   }
 
   goBack() {
