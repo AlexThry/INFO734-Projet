@@ -66,4 +66,10 @@ export class CommentService {
       }),
     );
   }
+
+  createcomment(post_id:string, user_id:string, content: string) {
+    const url = `http://localhost:3000/api/comment/create`;
+
+    return this.http.post(url, {"post_id": post_id, "user_id": user_id, "content": content});
+  }
 }
