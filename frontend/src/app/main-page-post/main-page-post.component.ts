@@ -7,20 +7,21 @@ import { Comment } from "../models/comment.model";
 import { CommentService } from "../services/comment.service";
 import { UserService } from "../services/user.service";
 import { User } from "../models/user.model";
+import { NgClass } from "@angular/common";
 
 @Component({
   selector: "app-main-page-post",
   standalone: true,
-  imports: [DateAgoPipe, RouterLink],
+  imports: [DateAgoPipe, RouterLink, NgClass],
   templateUrl: "./main-page-post.component.html",
   styleUrl: "./main-page-post.component.css",
 })
 export class MainPagePostComponent {
-  @Input() post!: Post
-  @Input() userConnected !: User;
-  imageStyle!: string
-  isLike!: boolean
-  nbLike!: number
+  @Input() post!: Post;
+  @Input() userConnected!: User;
+  imageStyle!: string;
+  isLike!: boolean;
+  nbLike!: number;
   firstComment!: Comment;
   description!: string;
 
@@ -59,7 +60,7 @@ export class MainPagePostComponent {
   isLikeByConnectedUser() {
     // TODO - Récupérer l'id de l'user connected
     const userConnectedID = this.userConnected.id.toString();
-    
+
     return this.post.likes.includes(userConnectedID);
   }
 
