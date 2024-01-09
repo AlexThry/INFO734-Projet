@@ -4,7 +4,8 @@ import { CommentService } from "../services/comment.service";
 import { Post } from "../models/post.model";
 import { DateAgoPipe } from "../pipes/date-ago.pipe";
 import {Router, RouterLink} from "@angular/router";
-import {FormsModule, NgForm} from "@angular/forms";
+import {FormBuilder, FormsModule, NgForm} from "@angular/forms";
+import {User} from "../models/user.model";
 
 @Component({
   selector: "app-comment-list",
@@ -17,6 +18,7 @@ export class CommentListComponent {
   commentList!: Comment[];
   loaded!: number;
   @Input() post!: Post;
+  @Input() userConnected!: User;
   @Output() cancelButtonClick = new EventEmitter<void>();
   @Input() write!:boolean;
   contentComment!: string;
@@ -29,6 +31,7 @@ export class CommentListComponent {
     this.commentService
       .getCommentsByPostIdFromLimit(this.post.id, 0, this.loaded)
       .subscribe((data) => {
+        console.log(data)
         this.commentList = data;
       });
   }
@@ -55,10 +58,18 @@ export class CommentListComponent {
     this.contentComment = ""
 
     if (f.value.comment != ""){
-      console.log("prout")
       this.contentComment = f.value.comment;
 
-      // TODO faire le lien avec le backend
+      this.loaded = 10;
+
+      this.commentService.createcomment(this.post.id.toString(), this.userConnected.id.toString(), this.contentComment)
+          .subscribe(()=>{
+            this.commentService
+                .getCommentsByPostIdFromLimit(this.post.id, 0, this.loaded)
+                .subscribe((data) => {
+                  this.commentList = data;
+                });
+          })
 
       this.cancelButtonClick.emit();
     }

@@ -7,6 +7,7 @@ import { CommentService } from "../services/comment.service";
 import { Comment } from "../models/comment.model";
 import { CommentListComponent } from "../comment-list/comment-list.component";
 import { Location } from "@angular/common";
+import {User} from "../models/user.model";
 
 @Component({
   selector: "app-full-post",
@@ -17,6 +18,7 @@ import { Location } from "@angular/common";
 })
 export class FullPostComponent {
   @Input() post!: Post;
+  @Input() userConnected!: User;
   imageStyle!: string;
   isLike!: boolean;
   nbLike!: number;
