@@ -1,4 +1,4 @@
-import {Component, Input, Output} from "@angular/core";
+import { Component, ElementRef, Input, Output } from "@angular/core";
 import { DateAgoPipe } from "../pipes/date-ago.pipe";
 import { Post } from "../models/post.model";
 import { PostService } from "../services/post.service";
@@ -7,7 +7,7 @@ import { CommentService } from "../services/comment.service";
 import { Comment } from "../models/comment.model";
 import { CommentListComponent } from "../comment-list/comment-list.component";
 import { Location } from "@angular/common";
-import {User} from "../models/user.model";
+import { User } from "../models/user.model";
 
 @Component({
   selector: "app-full-post",
@@ -23,13 +23,14 @@ export class FullPostComponent {
   isLike!: boolean;
   nbLike!: number;
   comments!: Comment[];
-  write:boolean = false;
+  write: boolean = false;
 
   constructor(
     protected postService: PostService,
     private commentService: CommentService,
     private route: ActivatedRoute,
     private location: Location,
+    private elementRef: ElementRef,
   ) {}
 
   ngOnInit() {
@@ -75,8 +76,25 @@ export class FullPostComponent {
     }
   }
 
-  addComment(){
+  addComment() {
     this.write = true;
+    setTimeout(() => {
+      const textareas: NodeListOf<HTMLTextAreaElement> =
+        this.elementRef.nativeElement.querySelectorAll("textarea");
+      textareas.forEach((textarea: HTMLTextAreaElement) => {
+        textarea.setAttribute(
+          "style",
+          "height:" + textarea.scrollHeight + "px;overflow-y:hidden;",
+        );
+      });
+
+      textareas.forEach((textarea: HTMLTextAreaElement) => {
+        textarea.addEventListener("input", function () {
+          this.style.height = "auto";
+          this.style.height = this.scrollHeight + "px";
+        });
+      });
+    }, 10);
   }
 
   cancelComment() {
