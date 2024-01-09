@@ -65,8 +65,6 @@ export class AccountPageComponent {
   }
 
   followUser(){
-    console.log("ca marche")
-    console.log(this.userConnected.id.toString(), this.route.snapshot.params["id"])
     this.userService.followOtherUser(this.userConnected.id.toString(), this.route.snapshot.params["id"])
         .subscribe(
             ([result1, result2]) => {
@@ -80,5 +78,21 @@ export class AccountPageComponent {
             }
         );
     this.follow = true;
+  }
+
+  unfollowUser(){
+    this.userService.unfollowOtherUser(this.userConnected.id.toString(), this.route.snapshot.params["id"])
+        .subscribe(
+            ([result1, result2]) => {
+              // Handle the results of both requests
+              console.log('Result of request 1:', result1);
+              console.log('Result of request 2:', result2);
+            },
+            error => {
+              // Handle errors
+              console.error('Error:', error);
+            }
+        );
+    this.follow = false;
   }
 }

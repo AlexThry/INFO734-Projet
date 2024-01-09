@@ -50,6 +50,30 @@ exports.newFollowerUser = (req, res, next) => {
     .catch(error => res.status(400).json({ error }));
 }
 
+// DELETE FOLLOWING
+exports.unFollowingUser = (req, res, next) => {
+    const userCurrentId = req.body.userCurrentId;
+    const userToFollowId = req.body.userToFollowId;
+
+    // Update userCurrentId : Remove userToFollowId in list of following
+    User.updateOne({ _id: userCurrentId }, { $pull: {following: userToFollowId}, _id: userCurrentId })
+        .then(() => {
+            res.status(200).json({ message: 'UserToFollow a bien été supprimé de la liste de following !'});
+        })
+        .catch(error => res.status(400).json({ error }));
+}
+
+// DELETE FOLLOWER
+exports.unFollowerUser = (req, res, next) => {
+    const userCurrentId = req.body.userCurrentId;
+    const userToFollowId = req.body.userToFollowId;
+
+    // Update userToFollowId : Add userCurrentId in list of followers
+    User.updateOne({ _id: userToFollowId }, { $pull: {followers: userCurrentId}, _id: userToFollowId })
+        .then(() => res.status(200).json({ message: 'userCurrentId a bien été supprimé de la liste de followers !'}))
+        .catch(error => res.status(400).json({ error }));
+}
+
 // DELETE
 exports.deleteUser = (req, res, next) => {
     User.deleteOne({ _id: req.params.id })

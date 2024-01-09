@@ -127,4 +127,36 @@ export class UserService {
 
       return forkJoin([request1, request2]);
   }
+
+    unfollowOtherUser(userCurrentId:string, userToFollowId:string){
+
+        const url1 = `http://localhost:3000/api/user/unFollowing`;
+        const url2 = `http://localhost:3000/api/user/unFollower`;
+
+        const request1 = this.http.put<any>(url1, { "userCurrentId": userCurrentId, "userToFollowId": userToFollowId })
+            .pipe(
+                catchError((error: HttpErrorResponse) => {
+                    if (error.status === 400) {
+                        console.error('unFollow échouée :', error);
+                    } else {
+                        console.error('Erreur lors du unfollow :', error);
+                    }
+                    return throwError(error);
+                })
+            );
+
+        const request2 = this.http.put<any>(url2, { "userCurrentId": userCurrentId, "userToFollowId": userToFollowId })
+            .pipe(
+                catchError((error: HttpErrorResponse) => {
+                    if (error.status === 400) {
+                        console.error('unFollow échouée :', error);
+                    } else {
+                        console.error('Erreur lors du unfollow :', error);
+                    }
+                    return throwError(error);
+                })
+            );
+
+        return forkJoin([request1, request2]);
+    }
 }
