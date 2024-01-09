@@ -17,6 +17,9 @@ export class AccountPageComponent {
   user!: User;
   posts!: Post[];
   @Input() userConnected!: User;
+  nbPosts!: number;
+  nbFollower!: number;
+  nbFollowing!: number;
 
   constructor(
     protected postService: PostService,
@@ -24,9 +27,22 @@ export class AccountPageComponent {
     private route: ActivatedRoute,
   ) {}
   ngOnInit() {
+    // Nb Post
+    this.route.params.subscribe(() => {
+      let id = this.route.snapshot.params["id"];
+      this.postService
+          .getPostsByUserIdFromLimit(id, 0, 1000)
+          .subscribe((posts) => {
+            this.nbPosts = posts.length;
+          });
+    });
+
+
     this.route.params.subscribe(() => {
       this.loadData();
     });
+
+
   }
 
   userIsLoaded() {
@@ -37,6 +53,7 @@ export class AccountPageComponent {
     const userId = this.route.snapshot.params["id"];
     this.userService.getUserById(userId).subscribe((user) => {
       this.user = user;
+      console.log(this.user)
     });
   }
 }
