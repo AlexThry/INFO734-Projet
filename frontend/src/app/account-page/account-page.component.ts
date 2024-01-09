@@ -49,6 +49,9 @@ export class AccountPageComponent {
       this.loadData();
     });
 
+      this.nbFollower = this.user.followers.length
+      this.nbFollowing = this.user.following.length
+
 
   }
 
@@ -60,7 +63,6 @@ export class AccountPageComponent {
     const userId = this.route.snapshot.params["id"];
     this.userService.getUserById(userId).subscribe((user) => {
       this.user = user;
-      console.log(this.user)
     });
   }
 
@@ -71,6 +73,7 @@ export class AccountPageComponent {
               // Handle the results of both requests
               console.log('Result of request 1:', result1);
               console.log('Result of request 2:', result2);
+              this.loadData()
             },
             error => {
               // Handle errors
@@ -87,6 +90,7 @@ export class AccountPageComponent {
               // Handle the results of both requests
               console.log('Result of request 1:', result1);
               console.log('Result of request 2:', result2);
+              this.loadData()
             },
             error => {
               // Handle errors
@@ -94,5 +98,6 @@ export class AccountPageComponent {
             }
         );
     this.follow = false;
+
   }
 }
