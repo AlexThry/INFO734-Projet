@@ -44,3 +44,24 @@ exports.getMessagesFromSenderIdAndReceiverIdFromLimit = (req, res, next) => {
     .then((message) => res.status(200).json(message))
     .catch((error) => res.status(404).json({ error }));
 };
+
+// GET CONV FROM USER ID
+
+exports.getLatestMessagePerConversation = (req, res, next) => {
+  Message.aggregate([
+    {
+      $sort: { timestamp: -1 },
+    },
+    {
+      $group: {
+        _id: "$conversation_id",
+        message: { $first: "$$ROOT" },
+      },
+    },
+    {
+      $replaceRoot: { newRoot: "$message" },
+    },
+  ])
+    .then((latestMessages) => res.status(200).json(latestMessages))
+    .catch((error) => res.status(400).json(error));
+};

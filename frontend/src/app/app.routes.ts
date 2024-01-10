@@ -6,7 +6,8 @@ import { SearchPageComponent } from "./search-page/search-page.component";
 import { LoginPageComponent } from "./login-page/login-page.component";
 import { RegisterPageComponent } from "./register-page/register-page.component";
 import { NewPostPageComponent } from "./new-post-page/new-post-page.component";
-import { MessagePannelComponent } from "./message-pannel/message-pannel.component";
+import { ConversationComponent } from "./conversation/conversation.component";
+import { ConversationListComponent } from "./conversation-list/conversation-list.component";
 
 export const routes: Routes = [
   { path: "post/:id", component: FullPostComponent },
@@ -16,6 +17,6 @@ export const routes: Routes = [
   { path: "home", component: PostListComponent },
   { path: "register", component: RegisterPageComponent },
   { path: "", component: LoginPageComponent },
-  { path: "message", component: MessagePannelComponent },
-  { path: "**", redirectTo: "/home" },
+  { path: "message/user/:id", component: ConversationComponent },
+  { path: "message/list", component: ConversationListComponent },
 ];

@@ -1,0 +1,46 @@
+<div class="mt-28">
+    <div class="lg:w-[700px] sm:w-[500px] w-[300px] mx-auto">
+        <div class="w-full sticky top-28 shadow-sm flex h-12 bg-gray-100 rounded-xl justify-center items-center">
+            <button (click)="goBack()" class=" absolute left-2 rounded-lg hover:bg-gray-200">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-8 h-8 stroke-gray-400">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+            </button>
+            <p class="font-bold text-xl">Messagerie</p>
+        </div>
+        <ul class="divide-y divide-gray-200 dark:divide-gray-700">
+        @for (message of messageList; track message) {
+
+            <li class="">
+                @if (message.sender_id == currentUser.id) {
+                    <a routerLink="/message/user/{{message.receiver_id}}" class="flex py-5 items-center rtl:space-x-reverse hover:bg-gray-300">
+                            <div class="rounded-full w-8 h-8 ml-2.5 bg-cover bg-center mr-4" [ngStyle]="{ 'background-image': 'url(' + correspondence[message.receiver_id]?.photo_url + ')'}"></div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                {{correspondence[message.receiver_id].username}}
+                            </p>
+                            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                            </p>
+                        </div>
+                        <p class="text-gray-500 inline-block mr-4 text-right">{{message.content | truncate }}</p>
+
+                    </a>
+                } @else {
+                    <a routerLink="/message/user/{{message.sender_id}}" class="flex py-5 items-center rtl:space-x-reverse hover:bg-gray-300">
+                        <div class="rounded-full w-8 h-8 ml-2.5 bg-cover bg-center mr-4" [ngStyle]="{ 'background-image': 'url(' + correspondence[message.sender_id]?.photo_url + ')'}"></div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                {{correspondence[message.sender_id].username}}
+                            </p>
+                            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                            </p>
+                        </div>
+                        <p class="text-gray-500 inline-block mr-4 text-right">{{message.content}}</p>
+
+                    </a>
+                }
+            </li>
+        }
+        </ul>
+    </div>
+</div>

@@ -13,5 +13,6 @@ router.get(
   "/user1=:user1_id&user2=:user2_id/from=:from&limit=:limit",
   messageCtrl.getMessagesFromSenderIdAndReceiverIdFromLimit,
 );
+router.post("/user-messages", messageCtrl.getLatestMessagePerConversation);
 
 module.exports = router;
