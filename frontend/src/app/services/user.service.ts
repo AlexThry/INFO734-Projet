@@ -4,6 +4,7 @@ import {forkJoin, Observable, switchMap} from 'rxjs';
 import { catchError, map, throwError } from 'rxjs';
 import { User } from '../models/user.model';
 import {Post} from "../models/post.model";
+import {log} from "node:util";
 
 @Injectable({
   providedIn: "root",
@@ -94,4 +95,68 @@ export class UserService {
           }))
   }
 
+  followOtherUser(userCurrentId:string, userToFollowId:string){
+      console.log("on est la")
+      console.log(userCurrentId, userToFollowId)
+      const url1 = `http://localhost:3000/api/user/newFollowing`;
+      const url2 = `http://localhost:3000/api/user/newFollower`;
+
+      const request1 = this.http.put<any>(url1, { "userCurrentId": userCurrentId, "userToFollowId": userToFollowId })
+          .pipe(
+              catchError((error: HttpErrorResponse) => {
+                  if (error.status === 400) {
+                      console.error('Follow échouée :', error);
+                  } else {
+                      console.error('Erreur lors du follow :', error);
+                  }
+                  return throwError(error);
+              })
+          );
+
+      const request2 = this.http.put<any>(url2, { "userCurrentId": userCurrentId, "userToFollowId": userToFollowId })
+          .pipe(
+              catchError((error: HttpErrorResponse) => {
+                  if (error.status === 400) {
+                      console.error('Follow échouée :', error);
+                  } else {
+                      console.error('Erreur lors du follow :', error);
+                  }
+                  return throwError(error);
+              })
+          );
+
+      return forkJoin([request1, request2]);
+  }
+
+    unfollowOtherUser(userCurrentId:string, userToFollowId:string){
+
+        const url1 = `http://localhost:3000/api/user/unFollowing`;
+        const url2 = `http://localhost:3000/api/user/unFollower`;
+
+        const request1 = this.http.put<any>(url1, { "userCurrentId": userCurrentId, "userToFollowId": userToFollowId })
+            .pipe(
+                catchError((error: HttpErrorResponse) => {
+                    if (error.status === 400) {
+                        console.error('unFollow échouée :', error);
+                    } else {
+                        console.error('Erreur lors du unfollow :', error);
+                    }
+                    return throwError(error);
+                })
+            );
+
+        const request2 = this.http.put<any>(url2, { "userCurrentId": userCurrentId, "userToFollowId": userToFollowId })
+            .pipe(
+                catchError((error: HttpErrorResponse) => {
+                    if (error.status === 400) {
+                        console.error('unFollow échouée :', error);
+                    } else {
+                        console.error('Erreur lors du unfollow :', error);
+                    }
+                    return throwError(error);
+                })
+            );
+
+        return forkJoin([request1, request2]);
+    }
 }

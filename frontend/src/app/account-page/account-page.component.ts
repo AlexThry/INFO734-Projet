@@ -5,6 +5,7 @@ import { ActivatedRoute, RouterLink } from "@angular/router";
 import { User } from "../models/user.model";
 import { UserService } from "../services/user.service";
 import { AccountPostListComponent } from "../account-post-list/account-post-list.component";
+import {log} from "node:util";
 
 @Component({
   selector: "app-account-page",
@@ -20,6 +21,7 @@ export class AccountPageComponent {
   nbPosts!: number;
   nbFollower!: number;
   nbFollowing!: number;
+  follow!: boolean;
 
   constructor(
     protected postService: PostService,
@@ -27,6 +29,11 @@ export class AccountPageComponent {
     private route: ActivatedRoute,
   ) {}
   ngOnInit() {
+    // console.log(this.userConnected.id)
+    this.userService.getUserById(this.route.snapshot.params["id"])
+        .subscribe((user)=>{this.follow = user.followers.includes(this.userConnected.id)})
+    // this.follow = this.followers.includes(this.userConnected.id);
+
     // Nb Post
     this.route.params.subscribe(() => {
       let id = this.route.snapshot.params["id"];
@@ -42,6 +49,9 @@ export class AccountPageComponent {
       this.loadData();
     });
 
+      this.nbFollower = this.user.followers.length
+      this.nbFollowing = this.user.following.length
+
 
   }
 
@@ -53,7 +63,41 @@ export class AccountPageComponent {
     const userId = this.route.snapshot.params["id"];
     this.userService.getUserById(userId).subscribe((user) => {
       this.user = user;
-      console.log(this.user)
     });
+  }
+
+  followUser(){
+    this.userService.followOtherUser(this.userConnected.id.toString(), this.route.snapshot.params["id"])
+        .subscribe(
+            ([result1, result2]) => {
+              // Handle the results of both requests
+              console.log('Result of request 1:', result1);
+              console.log('Result of request 2:', result2);
+              this.loadData()
+            },
+            error => {
+              // Handle errors
+              console.error('Error:', error);
+            }
+        );
+    this.follow = true;
+  }
+
+  unfollowUser(){
+    this.userService.unfollowOtherUser(this.userConnected.id.toString(), this.route.snapshot.params["id"])
+        .subscribe(
+            ([result1, result2]) => {
+              // Handle the results of both requests
+              console.log('Result of request 1:', result1);
+              console.log('Result of request 2:', result2);
+              this.loadData()
+            },
+            error => {
+              // Handle errors
+              console.error('Error:', error);
+            }
+        );
+    this.follow = false;
+
   }
 }

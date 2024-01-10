@@ -12,7 +12,9 @@ router.post('/login', userCtrl.login);
 
 router.put('/update/:id', userCtrl.updateUser);
 router.put('/newFollowing', userCtrl.newFollowingUser);
+router.put('/unFollowing', userCtrl.unFollowingUser);
 router.put('/newFollower', userCtrl.newFollowerUser);
+router.put('/unFollower', userCtrl.unFollowerUser);
 
 router.delete('/delete/:id', userCtrl.deleteUser);
 
