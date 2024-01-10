@@ -49,7 +49,7 @@ export class CommentListComponent {
 
   loadMore() {
     this.commentService
-      .getCommentsByPostIdFromLimit(this.post.id, this.loaded + 1, 10)
+      .getCommentsByPostIdFromLimit(this.post.id, this.loaded, 10)
       .subscribe((data) => {
         this.commentList.push(...data);
         this.loaded += 10;

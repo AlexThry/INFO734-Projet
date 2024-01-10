@@ -16,7 +16,7 @@ import { User } from "../models/user.model";
 export class PostListComponent implements OnInit {
   posts!: Post[];
   loaded!: number;
-  @Input() userConnected !: User;
+  @Input() userConnected!: User;
 
   constructor(
     private postService: PostService,
@@ -26,7 +26,7 @@ export class PostListComponent implements OnInit {
   ngOnInit() {
     this.loaded = 10;
     this.postService.getPostsFromLimit(0, this.loaded).subscribe((data) => {
-      this.posts = data;      
+      this.posts = data;
     });
   }
 
@@ -35,11 +35,9 @@ export class PostListComponent implements OnInit {
   }
 
   loadMore() {
-    this.postService
-      .getPostsFromLimit(this.loaded + 1, 10)
-      .subscribe((posts) => {
-        this.posts.push(...posts);
-        this.loaded += 10;
-      });
+    this.postService.getPostsFromLimit(this.loaded, 10).subscribe((posts) => {
+      this.posts.push(...posts);
+      this.loaded += 10;
+    });
   }
 }
