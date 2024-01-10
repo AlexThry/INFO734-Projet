@@ -22,7 +22,7 @@
                             <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                             </p>
                         </div>
-                        <p class="text-gray-500 inline-block mr-4 text-right">{{message.content | truncate }}</p>
+                        <p class="text-gray-500 inline-block mr-4 text-right">{{ message.content | truncate }}</p>
                     </a>
                 } @else {
                     <a routerLink="/message/user/{{message.sender_id}}" class="flex py-5 items-center rtl:space-x-reverse hover:bg-gray-300" [ngClass]="{'rounded-b-xl': isLast(message)}">
@@ -34,7 +34,7 @@
                             <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                             </p>
                         </div>
-                        <p class="text-gray-500 inline-block mr-4 text-right">{{message.content}}</p>
+                        <p class="text-gray-500 inline-block mr-4 text-right">{{ message.content | truncate }}</p>
                     </a>
                 }
             </li>
