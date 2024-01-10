@@ -42,7 +42,7 @@ export class MainPagePostComponent {
     this.nbLike = this.post.likes.length;
     try {
       this.commentService
-        .getCommentsByPostIdFromLimit(this.post.id, 1, 1)
+        .getCommentsByPostIdFromLimit(this.post.id, 0, 1)
         .subscribe((comment) => {
           this.firstComment = comment[0];
         });
@@ -58,14 +58,12 @@ export class MainPagePostComponent {
   }
 
   isLikeByConnectedUser() {
-    // TODO - Récupérer l'id de l'user connected
     const userConnectedID = this.userConnected.id.toString();
 
     return this.post.likes.includes(userConnectedID);
   }
 
   onPostLike() {
-    // TODO - Récupérer l'id de l'user connected
     const userConnectedID = this.userConnected.id.toString();
 
     this.isLike = !this.isLike;
