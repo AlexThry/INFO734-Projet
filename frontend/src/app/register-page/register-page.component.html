@@ -1,43 +1,92 @@
-<div class="h-full w-full mt-[10%] flex flex-col justify-center items-center">
-    <p class="text-5xl text-pink-700 my-6">APPLICATION</p>
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="max-w-sm mx-auto w-full">
-        <div class="mb-5">
-            <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your username</label>
-            <input name="username" ngModel  type="text" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" required>
-            @if (f.value.username === "" && submit){
-                <p class="text-red-700">Enter an username</p>
-            }
-            @if(errorRegisterExist() && errorIsUsername()) {
-                <p class="text-red-700">{{ errorRegister.message }}</p>
-            }
-        </div>
-        <div class="mb-5">
-            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-            <input name="email" ngModel  type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" placeholder="name@gmail.com" required>
-            @if (f.value.email === "" && submit){
-                <p class="text-red-700">Enter an email</p>
-            }
-            @if(errorRegisterExist() && errorIsEmail()) {
-                <p class="text-red-700">{{ errorRegister.message }}</p>
-            }
-        </div>
-        <div class="mb-5">
-            <label for="photo_url" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your picture</label>
-            <input name="photo_url" ngModel  type="file" id="photo_url" (change)="onFileChange($event)" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" required>
-            @if (f.value.photo_url === "" && submit){
-                <p class="text-red-700">Load a picture</p>
-            }
-        </div>
-        <div class="mb-5">
-            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-            <input name="password" ngModel  type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" required>
-            @if (f.value.password === "" && submit){
-                <p class="text-red-700">Enter a password</p>
-            }
-        </div>
+<!--<div class="h-full w-full mt-[10%] flex flex-col justify-center items-center">-->
+<!--    <p class="text-5xl text-pink-700 my-6">APPLICATION</p>-->
+<!--    <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="max-w-sm mx-auto w-full">-->
+<!--        <div class="mb-5">-->
+<!--            <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your username</label>-->
+<!--            <input name="username" ngModel  type="text" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" required>-->
+<!--            @if (f.value.username === "" && submit){-->
+<!--                <p class="text-red-700">Enter an username</p>-->
+<!--            }-->
+<!--            @if(errorRegisterExist() && errorIsUsername()) {-->
+<!--                <p class="text-red-700">{{ errorRegister.message }}</p>-->
+<!--            }-->
+<!--        </div>-->
+<!--        <div class="mb-5">-->
+<!--            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>-->
+<!--            <input name="email" ngModel  type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" placeholder="name@gmail.com" required>-->
+<!--            @if (f.value.email === "" && submit){-->
+<!--                <p class="text-red-700">Enter an email</p>-->
+<!--            }-->
+<!--            @if(errorRegisterExist() && errorIsEmail()) {-->
+<!--                <p class="text-red-700">{{ errorRegister.message }}</p>-->
+<!--            }-->
+<!--        </div>-->
+<!--        <div class="mb-5">-->
+<!--            <label for="photo_url" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your picture</label>-->
+<!--            <input name="photo_url" ngModel  type="file" id="photo_url" (change)="onFileChange($event)" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" required>-->
+<!--            @if (f.value.photo_url === "" && submit){-->
+<!--                <p class="text-red-700">Load a picture</p>-->
+<!--            }-->
+<!--        </div>-->
+<!--        <div class="mb-5">-->
+<!--            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>-->
+<!--            <input name="password" ngModel  type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" required>-->
+<!--            @if (f.value.password === "" && submit){-->
+<!--                <p class="text-red-700">Enter a password</p>-->
+<!--            }-->
+<!--        </div>-->
 
 
-        <button type="submit" class="text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800">Create account</button>
-        <p class="mt-2">Have an account ? <a routerLink="/" class="text-pink-700">Login</a></p>
-    </form>
-</div>
+<!--        <button type="submit" class="text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800">Create account</button>-->
+<!--        <p class="mt-2">Have an account ? <a routerLink="/" class="text-pink-700">Login</a></p>-->
+<!--    </form>-->
+
+    <div class="h-[100vh] w-[100vw] flex flex-col justify-center items-center" style="background-color: #F9F9F9">
+        <p class="text-5xl text-pink-700 my-8 mt-0">APPLICATION</p>
+        <div class="w-[500px] max-w-[90vw] p-10 rounded-2xl bg-white" style="box-shadow: 0px 10px 25px 5px #0000000f">
+            <div class="flex flex-col justify-center items-center content-center text-center">
+                <p class="text-3xl font-bold mb-4">Register</p>
+            </div>
+            <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="max-w-sm mx-auto w-full">
+                <div class="mb-5">
+                    <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                    <input name="username" ngModel  type="text" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" placeholder="Username" required>
+                    @if (f.value.username === "" && submit){
+                        <p class="text-red-700">Enter an username</p>
+                    }
+                    @if(errorRegisterExist() && errorIsUsername()) {
+                        <p class="text-red-700">{{ errorRegister.message }}</p>
+                    }
+                </div>
+                <div class="mb-5">
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                    <input name="email" ngModel  type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" placeholder="name@gmail.com" required>
+                    @if (f.value.email === "" && submit){
+                        <p class="text-red-700">Enter an email</p>
+                    }
+                    @if(errorRegisterExist() && errorIsEmail()) {
+                        <p class="text-red-700">{{ errorRegister.message }}</p>
+                    }
+                </div>
+                <div class="mb-5">
+                    <label for="photo_url" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your picture</label>
+                    <input name="photo_url" ngModel  type="file" id="photo_url" (change)="onFileChange($event)" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" required>
+                    @if (f.value.photo_url === "" && submit){
+                        <p class="text-red-700">Load a picture</p>
+                    }
+                </div>
+                <div class="mb-5">
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
+                    <input name="password" ngModel  type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" placeholder="Password" required>
+                    @if (f.value.password === "" && submit){
+                        <p class="text-red-700">Enter a password</p>
+                    }
+                </div>
+
+
+                <button type="submit" class="px-4 py-3 text-base w-full rounded-[2rem] border-none my-5 cursor-pointer bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 focus:ring-4 focus:ring-pink-300 text-white hover:bg-pink-700 shadow-lg">Create account</button>
+                <p class="mt-2">Have an account ? <a routerLink="/" class="text-pink-700">Login</a></p>
+            </form>
+        </div>
+    </div>
+<!--</div>-->
