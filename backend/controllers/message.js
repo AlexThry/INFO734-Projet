@@ -68,6 +68,7 @@ exports.getLatestMessagePerConversation = (req, res, next) => {
       $replaceRoot: { newRoot: "$message" },
     },
   ])
+    .sort({ timestamp: -1 })
     .then((latestMessages) => res.status(200).json(latestMessages))
     .catch((error) => res.status(400).json(error));
 };
