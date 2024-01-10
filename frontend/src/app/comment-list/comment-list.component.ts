@@ -12,12 +12,13 @@ import { DateAgoPipe } from "../pipes/date-ago.pipe";
 import { Router, RouterLink } from "@angular/router";
 import { FormBuilder, FormsModule, NgForm } from "@angular/forms";
 import { User } from "../models/user.model";
+import { NgStyle } from "@angular/common";
 declare var $: any;
 
 @Component({
   selector: "app-comment-list",
   standalone: true,
-  imports: [DateAgoPipe, RouterLink, FormsModule],
+  imports: [DateAgoPipe, RouterLink, FormsModule, NgStyle],
   templateUrl: "./comment-list.component.html",
   styleUrl: "./comment-list.component.css",
 })

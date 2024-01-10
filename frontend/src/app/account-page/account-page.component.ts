@@ -5,12 +5,13 @@ import { ActivatedRoute, RouterLink } from "@angular/router";
 import { User } from "../models/user.model";
 import { UserService } from "../services/user.service";
 import { AccountPostListComponent } from "../account-post-list/account-post-list.component";
-import {log} from "node:util";
+import { log } from "node:util";
+import { NgStyle } from "@angular/common";
 
 @Component({
   selector: "app-account-page",
   standalone: true,
-  imports: [RouterLink, AccountPostListComponent],
+  imports: [RouterLink, AccountPostListComponent, NgStyle],
   templateUrl: "./account-page.component.html",
   styleUrl: "./account-page.component.css",
 })
@@ -30,29 +31,29 @@ export class AccountPageComponent {
   ) {}
   ngOnInit() {
     // console.log(this.userConnected.id)
-    this.userService.getUserById(this.route.snapshot.params["id"])
-        .subscribe((user)=>{this.follow = user.followers.includes(this.userConnected.id)})
+    this.userService
+      .getUserById(this.route.snapshot.params["id"])
+      .subscribe((user) => {
+        this.follow = user.followers.includes(this.userConnected.id);
+      });
     // this.follow = this.followers.includes(this.userConnected.id);
 
     // Nb Post
     this.route.params.subscribe(() => {
       let id = this.route.snapshot.params["id"];
       this.postService
-          .getPostsByUserIdFromLimit(id, 0, 1000)
-          .subscribe((posts) => {
-            this.nbPosts = posts.length;
-          });
+        .getPostsByUserIdFromLimit(id, 0, 1000)
+        .subscribe((posts) => {
+          this.nbPosts = posts.length;
+        });
     });
-
 
     this.route.params.subscribe(() => {
       this.loadData();
     });
 
-      this.nbFollower = this.user.followers.length
-      this.nbFollowing = this.user.following.length
-
-
+    this.nbFollower = this.user.followers.length;
+    this.nbFollowing = this.user.following.length;
   }
 
   userIsLoaded() {
@@ -66,38 +67,45 @@ export class AccountPageComponent {
     });
   }
 
-  followUser(){
-    this.userService.followOtherUser(this.userConnected.id.toString(), this.route.snapshot.params["id"])
-        .subscribe(
-            ([result1, result2]) => {
-              // Handle the results of both requests
-              console.log('Result of request 1:', result1);
-              console.log('Result of request 2:', result2);
-              this.loadData()
-            },
-            error => {
-              // Handle errors
-              console.error('Error:', error);
-            }
-        );
+  followUser() {
+    this.userService
+      .followOtherUser(
+        this.userConnected.id.toString(),
+        this.route.snapshot.params["id"],
+      )
+      .subscribe(
+        ([result1, result2]) => {
+          // Handle the results of both requests
+          console.log("Result of request 1:", result1);
+          console.log("Result of request 2:", result2);
+          this.loadData();
+        },
+        (error) => {
+          // Handle errors
+          console.error("Error:", error);
+        },
+      );
     this.follow = true;
   }
 
-  unfollowUser(){
-    this.userService.unfollowOtherUser(this.userConnected.id.toString(), this.route.snapshot.params["id"])
-        .subscribe(
-            ([result1, result2]) => {
-              // Handle the results of both requests
-              console.log('Result of request 1:', result1);
-              console.log('Result of request 2:', result2);
-              this.loadData()
-            },
-            error => {
-              // Handle errors
-              console.error('Error:', error);
-            }
-        );
+  unfollowUser() {
+    this.userService
+      .unfollowOtherUser(
+        this.userConnected.id.toString(),
+        this.route.snapshot.params["id"],
+      )
+      .subscribe(
+        ([result1, result2]) => {
+          // Handle the results of both requests
+          console.log("Result of request 1:", result1);
+          console.log("Result of request 2:", result2);
+          this.loadData();
+        },
+        (error) => {
+          // Handle errors
+          console.error("Error:", error);
+        },
+      );
     this.follow = false;
-
   }
 }

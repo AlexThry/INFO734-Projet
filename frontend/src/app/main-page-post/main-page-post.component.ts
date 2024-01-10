@@ -7,12 +7,12 @@ import { Comment } from "../models/comment.model";
 import { CommentService } from "../services/comment.service";
 import { UserService } from "../services/user.service";
 import { User } from "../models/user.model";
-import { NgClass } from "@angular/common";
+import { NgClass, NgStyle } from "@angular/common";
 
 @Component({
   selector: "app-main-page-post",
   standalone: true,
-  imports: [DateAgoPipe, RouterLink, NgClass],
+  imports: [DateAgoPipe, RouterLink, NgClass, NgStyle],
   templateUrl: "./main-page-post.component.html",
   styleUrl: "./main-page-post.component.css",
 })

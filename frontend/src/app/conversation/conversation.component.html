@@ -13,7 +13,7 @@
             @if (message.sender_id == connectedUser.id) {
                 <div class="flex justify-end" [ngClass]="{'mb-28': isFirstMessag(message)}">
                     <div class="flex items-start">
-                        <div class="flex flex-col w-full items-end max-w-[320px] leading-1.5 p-4 border-gray-200 bg-pink-500 rounded-s-xl rounded-ee-xl rounded-se-sm">
+                        <div class="flex flex-col items-end max-w-[320px] leading-1.5 p-4 border-gray-200 bg-pink-500 rounded-s-xl rounded-ee-xl rounded-se-sm">
                             <div class="flex items-center space-x-2 rtl:space-x-reverse">
                                 <span class="text-sm font-normal text-gray-300">{{ message.timestamp | date: 'short' }}</span>
                             </div>
@@ -26,7 +26,7 @@
                 <div class="flex justify-start" [ngClass]="{'mb-28': isFirstMessag(message)}">
                     <div class="flex items-start gap-2.5">
                         <div class="rounded-full w-8 h-8 ml-2.5 bg-cover bg-center" [ngStyle]="{ 'background-image': 'url(' + correspondent?.photo_url + ')'}"></div>
-                        <div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
+                        <div class="flex flex-col max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
                             <div class="flex items-center space-x-2 rtl:space-x-reverse">
                                 <span class="text-sm font-normal text-gray-500 dark:text-gray-400">{{ message.timestamp | date: 'short' }}</span>
                             </div>

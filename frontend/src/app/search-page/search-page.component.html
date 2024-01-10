@@ -12,8 +12,7 @@
             <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
             @for (user of this.users; track user){
                 <a routerLink="/account/{{user.id}}" class="h-full cursor-pointer flex flex-col items-center">
-                    <img class="w-28 h-28  -md:w-24 -md:h-24 p-0.5 mt-2 rounded-full ring-2 ring-pink-500 dark:ring-pink-700"
-                         src="{{ user.photo_url }}" alt="Bordered avatar">
+                    <div class="w-28 h-28  -md:w-24 -md:h-24 p-0.5 mt-2 rounded-full ring-2 ring-pink-500 dark:ring-pink-700 bg-cover bg-center" [ngStyle]="{ 'background-image': 'url(' + user.photo_url + ')'}"></div>
                     <p class="mt-2 text-xl text-center">{{user.username}}</p>
                 </a>
 
@@ -32,8 +31,7 @@
                 @for (post of this.posts; track post){
                     <div class="">
                         <a class="mb-2 flex items-center">
-                            <img class="w-10 h-10 mr-2 p-0.5 rounded-full ring-2 ring-pink-500 dark:ring-pink-700 -sm:w-8 -sm:h-8"
-                                 src="{{ this.post.user.photo_url }}" alt="Bordered avatar">
+                            <div class="w-10 h-10 mr-2 p-0.5 rounded-full ring-2 ring-pink-500 dark:ring-pink-700 -sm:w-8 -sm:h-8 bg-cover bg-center" [ngStyle]="{ 'background-image': 'url(' + this.post.user.photo_url + ')'}"></div>
                             <div>
                                 <a routerLink="/account/{{post.user_id}}"><p class="font-bold text-m -sm:text-xs">{{ this.post.user.username }}</p></a>
                                 <p class="text-xs -sm:text-xxs">{{ this.post.timestamp | dateAgo }}</p>
