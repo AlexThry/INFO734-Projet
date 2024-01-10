@@ -1,6 +1,6 @@
 <div class="select-none mx-auto">
     <div class="p-0.5 relative rounded-[14px] bg-center bg-cover cursor-pointer hover:ring-4 ring-pink-500 duration-150 hover:z-10 md:hover:scale-110">
-        <img src="{{this.post.image_url}}" (click)="onViewPost()" alt="{{this.post.user.photo_url}}" class="relative w-28 h-28 sm:w-40 sm:h-40 lg:w-48 lg:h-48 rounded-xl shadow bg-center object-cover cursor-pointer">
+        <div [ngStyle]="{ 'background-image': 'url(' + this.post.image_url + ')'}" class="relative w-28 h-28 sm:w-40 sm:h-40 lg:w-48 lg:h-48 rounded-xl shadow bg-center bg-cover cursor-pointer"></div>
     </div>
 </div>
 

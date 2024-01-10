@@ -3,11 +3,12 @@ import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { User } from "../models/user.model";
 import { AuthService } from "../services/auth.service";
 import { routes } from "../app.routes";
+import { NgStyle } from "@angular/common";
 
 @Component({
   selector: "app-sidebar",
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, NgStyle],
   templateUrl: "./sidebar.component.html",
   styleUrl: "./sidebar.component.css",
 })

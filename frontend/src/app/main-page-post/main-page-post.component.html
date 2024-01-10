@@ -1,15 +1,14 @@
 @defer (when userIsLoaded()) {
     <div class="w-full max-w-[90%] select-none my-4 mx-auto">
-        <a class="mb-2 flex items-center">
-            <img class="w-10 h-10 mr-2 p-0.5 rounded-full ring-2 ring-pink-500 dark:ring-pink-700 -sm:w-8 -sm:h-8"
-                  [src]="post.user.photo_url" alt="Bordered avatar">
+        <a class="mb-2 flex items-center" routerLink="/account/{{this.post.user_id}}">
+            <div class="w-10 h-10 mr-2 p-0.5 rounded-full ring-2 ring-pink-500 dark:ring-pink-700 -sm:w-8 -sm:h-8 bg-center bg-cover" [ngStyle]="{ 'background-image': 'url(' + this.post.user.photo_url + ')'}"></div>
             <div>
-                <a routerLink="/account/{{this.post.user_id}}"><p class="font-bold text-m -sm:text-xs">{{ post.user.username  }}</p></a>
+                <p class="font-bold text-m -sm:text-xs">{{ post.user.username  }}</p>
                 <p class="text-xs -sm:text-xxs">{{ post.timestamp | dateAgo }}</p>
             </div>
         </a>
         <div class="relative w-full h-96 rounded-xl bg-center bg-cover cursor-pointer">
-            <img src="{{this.post.image_url}}" (click)="onViewPost()" alt="{{this.post.user.photo_url}}" class="relative w-full h-96 rounded-xl bg-center object-cover cursor-pointer">
+            <div (click)="onViewPost()" [ngStyle]="{ 'background-image': 'url(' + this.post.image_url + ')'}" class="relative w-full h-96 rounded-xl bg-center bg-cover object-cover cursor-pointer"></div>
             <div class="absolute flex justify-around items-center h-10 w-36 right-4 bottom-0 translate-y-1/2 rounded-lg bg-gray-300 bg-opacity-50 backdrop-blur ring-2 ring-white">
                 <a>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -43,8 +42,7 @@
             <div class="p-3 mt-8 border-2 rounded-xl flex items-center">
                 <div class="flex items-center w-12">
                     <a routerLink="/account/{{firstComment.user.id}}">
-                        <img class="w-8 h-8 mr-3 p-0.5 rounded-full ring-2 ring-pink-500 dark:ring-pink-700 -sm:w-8 -sm:h-8"
-                             src="{{ firstComment.user.photo_url }}" alt="Bordered avatar">
+                        <div class="w-8 h-8 mr-3 p-0.5 rounded-full ring-2 ring-pink-500 dark:ring-pink-700 -sm:w-8 -sm:h-8 bg-cover bg-center" [ngStyle]="{ 'background-image': 'url(' + firstComment.user.photo_url + ')'}"></div>
                     </a>
                 </div>
                 <div class="w-full">{{firstComment.content}}</div>
