@@ -6,19 +6,23 @@
             </svg>
         </button>
     </div>
-    <p class="text-5xl text-pink-700 my-6">NEW POST</p>
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="max-w-sm mx-auto w-full">
-        <div class="mb-5">
-            <label for="image_url" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your picture</label>
-            <input name="image_url" ngModel  type="file" (change)="onFileChange($event)" id="image_url" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" required>
-            @if (f.value.image_url === "" && submit){
-                <p class="text-red-700">Load an image</p>
-            }
+    <div class="flex flex-col justify-center items-center">
+        <p class="text-5xl text-pink-700 my-8 mt-0">NEW POST</p>
+        <div class="w-[500px] max-w-[90vw] p-10 rounded-2xl bg-white" style="box-shadow: 0px 10px 25px 5px #0000000f">
+            <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="max-w-sm mx-auto w-full">
+                <div class="mb-5">
+                    <label for="image_url" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your picture</label>
+                    <input name="image_url" ngModel  type="file" (change)="onFileChange($event)" id="image_url" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" required>
+                    @if (f.value.image_url === "" && submit){
+                        <p class="text-red-700">Load an image</p>
+                    }
+                </div>
+                <div class="mb-5">
+                    <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your description</label>
+                    <textarea name="description" ngModel  type="text" id="description" rows="4"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" placeholder="Write your description..." required></textarea>
+                </div>
+                <button type="submit" class="px-4 py-3 text-base w-full rounded-[2rem] border-none my-5 cursor-pointer bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 focus:ring-4 focus:ring-pink-300 text-white hover:bg-pink-700 shadow-lg">Create New Post</button>
+            </form>
         </div>
-        <div class="mb-5">
-            <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your description</label>
-            <textarea name="description" ngModel  type="text" id="description" rows="4"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" placeholder="Write your description..." required></textarea>
-        </div>
-        <button type="submit" class="text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800">Create New Post</button>
-    </form>
+    </div>
 </div>
