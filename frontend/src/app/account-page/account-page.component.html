@@ -26,7 +26,9 @@
                     <button (click)="unfollowUser()" type="button" class="w-40 text-white bg-pink-500 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 hover:shadow-pink-500/25  dark:shadow-lg transition duration-150 dark:shadow-pink-800/80 font-medium rounded-lg text-md px-5 py-2.5 text-center me-2 mb-2 mt-2">Unfollow</button>
                 }
                 <button type="button" class="w-40 text-white bg-pink-500 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 hover:shadow-pink-500/25  dark:shadow-lg transition duration-150 dark:shadow-pink-800/80 font-medium rounded-lg text-md px-5 py-2.5 text-center me-2 mb-2 mt-2">Share</button>
+                <a routerLink="/message/user/{{ this.user.id }}" type="button" class="w-40 text-white bg-pink-500 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 hover:shadow-pink-500/25  dark:shadow-lg transition duration-150 dark:shadow-pink-800/80 font-medium rounded-lg text-md px-5 py-2.5 text-center me-2 mb-2 mt-2">Chat</a>
             </div>
+
         }
         <hr class="mb-6 mt-4 border-1">
         <app-account-post-list></app-account-post-list>

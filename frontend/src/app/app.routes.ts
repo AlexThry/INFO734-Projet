@@ -6,9 +6,10 @@ import { SearchPageComponent } from "./search-page/search-page.component";
 import { LoginPageComponent } from "./login-page/login-page.component";
 import { RegisterPageComponent } from "./register-page/register-page.component";
 import { NewPostPageComponent } from "./new-post-page/new-post-page.component";
+import { ConversationComponent } from "./conversation/conversation.component";
+import { ConversationListComponent } from "./conversation-list/conversation-list.component";
 
 export const routes: Routes = [
-  // { path: "post/:id", component: FullPostComponent, canActivate: [ AuthGuard ] },
   { path: "post/:id", component: FullPostComponent },
   { path: "create", component: NewPostPageComponent },
   { path: "account/:id", component: AccountPageComponent },
@@ -16,5 +17,6 @@ export const routes: Routes = [
   { path: "home", component: PostListComponent },
   { path: "register", component: RegisterPageComponent },
   { path: "", component: LoginPageComponent },
-  { path: "**", redirectTo: "/home" },
+  { path: "message/user/:id", component: ConversationComponent },
+  { path: "message/list", component: ConversationListComponent },
 ];

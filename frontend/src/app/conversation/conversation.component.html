@@ -1,0 +1,57 @@
+<div class="mt-28 lg:w-[700px] sm:w-[500px] w-[300px] m-auto">
+    <div class="w-full sticky top-28 shadow-sm flex h-12 bg-gray-100 rounded-xl justify-center items-center">
+        <button (click)="goBack()" class=" absolute left-2 rounded-lg hover:bg-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-8 h-8 stroke-gray-400">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+        </button>
+        <p class="font-bold text-xl">{{correspondent.username}}</p>
+    </div>
+
+    <div class="w-full flex flex-col-reverse gap-y-4 mt-4 mb-40">
+        @for (message of this.messageList; track message) {
+            @if (message.sender_id == connectedUser.id) {
+                <div class="flex justify-end" [ngClass]="{'mb-28': isFirstMessag(message)}">
+                    <div class="flex items-start">
+                        <div class="flex flex-col w-full items-end max-w-[320px] leading-1.5 p-4 border-gray-200 bg-pink-500 rounded-s-xl rounded-ee-xl rounded-se-sm">
+                            <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                                <span class="text-sm font-normal text-gray-300">{{ message.timestamp | date: 'short' }}</span>
+                            </div>
+                            <p class="text-sm font-normal text-right py-2.5 text-white">{{ message.content }}</p>
+                        </div>
+                        <div class="rounded-full w-8 h-8 ml-2.5 bg-cover bg-center" [ngStyle]="{ 'background-image': 'url(' + connectedUser?.photo_url + ')'}"></div>
+                    </div>
+                </div>
+            } @else {
+                <div class="flex justify-start" [ngClass]="{'mb-28': isFirstMessag(message)}">
+                    <div class="flex items-start gap-2.5">
+                        <div class="rounded-full w-8 h-8 ml-2.5 bg-cover bg-center" [ngStyle]="{ 'background-image': 'url(' + correspondent?.photo_url + ')'}"></div>
+                        <div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
+                            <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                                <span class="text-sm font-normal text-gray-500 dark:text-gray-400">{{ message.timestamp | date: 'short' }}</span>
+                            </div>
+                            <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">{{ message.content }}</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <div class="fixed lg:w-[700px] sm:w-[500px] w-[300px] bottom-4 mx-auto">
+        <form #f="ngForm" (ngSubmit)="onSubmitMessage(f)">
+            <div class="w-full mb-4 border-1 border-gray-200 rounded-lg backdrop-blur">
+                <div class="px-4 py-2 flex items-end rounded-lg dark:bg-gray-800">
+                    <textarea name="message" rows="1" ngModel id="comment" class="w-full mr-3 px-0 text-sm bg-transparent text-gray-900 border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400 resize-none" placeholder="Write a comment..." required></textarea>
+                    <button type="submit" class="flex items-center justify-center py-2.5 px-4 text-xs font-medium text-center text-white bg-pink-500 rounded-lg focus:ring-4 focus:ring-pink-200 dark:focus:ring-pink-700 hover:bg-pink-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
