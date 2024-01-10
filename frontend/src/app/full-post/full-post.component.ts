@@ -63,7 +63,7 @@ export class FullPostComponent {
 
   onPostLike() {
     // TODO - Récupérer l'id de l'user connected
-    const userConnectedID = "657c380b55f994f1b9fd2fdb";
+    const userConnectedID = this.userConnected.id.toString();
 
     this.isLike = !this.isLike;
 
