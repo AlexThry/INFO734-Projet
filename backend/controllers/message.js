@@ -48,7 +48,13 @@ exports.getMessagesFromSenderIdAndReceiverIdFromLimit = (req, res, next) => {
 // GET CONV FROM USER ID
 
 exports.getLatestMessagePerConversation = (req, res, next) => {
+  const user_id = new mongoose.Types.ObjectId(req.body.user_id);
   Message.aggregate([
+    {
+      $match: {
+        $or: [{ sender_id: user_id }, { receiver_id: user_id }],
+      },
+    },
     {
       $sort: { timestamp: -1 },
     },

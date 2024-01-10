@@ -5,13 +5,13 @@ import { AuthService } from "../services/auth.service";
 import { Message } from "../models/message.model";
 import { RouterLink } from "@angular/router";
 import { UserService } from "../services/user.service";
-import { Location, NgStyle } from "@angular/common";
+import { Location, NgClass, NgStyle } from "@angular/common";
 import { TruncatePipe } from "../pipes/truncate.pipe";
 
 @Component({
   selector: "app-conversation-list",
   standalone: true,
-  imports: [RouterLink, NgStyle, TruncatePipe],
+  imports: [RouterLink, NgStyle, TruncatePipe, NgClass],
   templateUrl: "./conversation-list.component.html",
   styleUrl: "./conversation-list.component.css",
 })
@@ -55,5 +55,9 @@ export class ConversationListComponent {
 
   goBack() {
     this.location.back();
+  }
+
+  isLast(message: Message) {
+    return message.id === this.messageList[this.messageList.length - 1].id;
   }
 }
